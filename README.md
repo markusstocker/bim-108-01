@@ -1,4 +1,4 @@
-# SW101
+# Grundlagen XML und RDF 
 
 Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01) der Hochschule Hannover.
 
