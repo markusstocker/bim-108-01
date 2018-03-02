@@ -67,6 +67,7 @@ cp notebooks/lecture-N/lecture-N.ipynb ../bim-108-01-solutions/
 
 ```
 cd bim-108-01-solutions/
+git add lecture-N.ipynb
 git commit -a -m "solution to exercise N"
 git push
 ```
