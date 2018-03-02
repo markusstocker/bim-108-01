@@ -12,31 +12,58 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 |4.  | 26.3 | Schema: Document Type Definition (DTD) |  
 |5.  | 9.4  | Schema: XML Schema |
 |6.  | 16.4 | Einführung in RDF |
-|7.  | 23.4 | RDF: Fortgeschrittene Themen |
-|8.  | 30.4 | RDF Syntax: Eine breite Wahl |
+|7.  | 23.4 | RDF Syntax: Eine breite Wahl |
+|8.  | 30.4 | RDF: Fortgeschrittene Themen |
 |9.  | 7.5  | SPARQL: Die RDF Abfragesprache |
 |10. | 14.5 | SPARQL: Fortgeschrittene Themen |
 |11. | 28.5 | Einführung in RDF Schema |
 |12. | 4.6  | Ontologien mit RDF Schema |
 |13. | 11.6 | Tools für RDF |
 |14. | 18.6 | XML und RDF: Rückschau und Ausblick |
-|15. | ?    | Klausur |
+|15. | (?) 25.6 | Klausur |
 
 ## Übungen
 
-### Installation
+### Voraussetzungen
+
+* Anaconda: [https://www.anaconda.com/download/](https://www.anaconda.com/download/)
+* Git Client: [https://git-scm.com/downloads](https://git-scm.com/downloads)
+
+### Anleitung
+
+#### Setup
+
+* [GitHub](https://github.com) Account eröffnen oder einloggen, falls vorhanden
+* Neues Repository `bim-108-01-solutions` erstellen
+* "Git Bash Here" auf Desktop mittels rechter Maustaste
+* In Git Bash, folgende Befehle ausführen
+
+``` 
+git clone https://markusstocker@github.com/markusstocker/bim-108-01.git
+git clone https://[USERNAME]@github.com/[USERNAME]/bim-108-01-solutions.git
+``` 
+
+#### Übung N Ausführen
+
+* N steht für die Übungsnummer: 01, 02, ...
+* In Git Bash, folgende Befehle ausführen
 
 ```
-conda create --name bim-108-01 python
-source activate bim-108-01
-conda install notebook
-pip install rdflib 
+cp bim-108-01/notebooks/lecture-N/lecture-N.ipynb bim-108-01-solutions/
 ```
 
-```
-source activate bim-108-01
-jupyter notebook notebooks/
-source deactivate bim-108-01
+* Anaconda Navigator starten
+* Jupyter Notebook starten
+* Nach `Desktop/bim-108-01-solutions` navigieren
+* Und `lecture-N.ipynb` öffnen
 
-conda create --name bim-108-01 python
+#### Übung N Einreichen
+
+* In Git Bash, folgende Befehle ausführen
+
 ```
+cd bim-108-01-solutions/
+git commit -a -m "solution to exercise N"
+git push
+```
+

@@ -1,0 +1,510 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{darkblue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\title{Einführung in XML}
+\author{Markus Stocker}
+\date{5. März 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+	
+	\centering\huge
+	Wer hat von XML schon gehört?
+	
+	\vspace{0.5cm}
+	\Large
+	Warum das Symbol \texttt{</>}?
+	
+	\vspace{1cm}
+	
+	\includegraphics[scale=0.3]{xml.png}
+	
+	\vspace{0.5cm}
+	\tiny
+	http://www.iconarchive.com/artist/hopstarter.html 
+	
+	(CC BY-NC-ND 4.0)
+	
+\end{frame}
+
+\begin{frame}[fragile]{Was ist XML?}
+  
+  \begin{itemize}
+  	\item XML steht für e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage
+  	\item Auf Deutsch: Erweiterbare Auszeichnungssprache
+  	\item Es ist eine \emph{markup language}, eine Auszeichnungssprache
+  	\item Eine Sprache zur Auszeichnung von Text in Dokumenten
+  	\item Ursprünglich aus typographie, z.B. Farbauszeichnung
+  	\item \emph{Markup} ist syntaktisch unterscheidbar von Inhalt
+  	\item HTML ist wohl die bekannteste Auszeichnungssprache
+  	\item Markup Beispiele
+	\begin{lstlisting}
+   	  XML: <planet>Earth</planet>
+	  HTML: <h2>Earth</h2> 
+	  LaTeX: \textbf{Earth}
+  	\end{lstlisting}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Was is XML?}
+	
+	\begin{itemize}
+		\item XML ist eine \emph{meta} Auszeichnungssprache
+		\begin{itemize}
+			\item Eine Sprache zur Erstellung anderer Auszeichnungssprachen
+			\item XML basierte Auszeichnungssprachen: SVG, XHTML, RSS, ...
+		\end{itemize}
+		\item XML ist eine \emph{beschreibende} Auszeichnungssprache
+		\begin{itemize}
+			\item Reine Markierung von Inhalten
+			\item Keine Verarbeitungsanweisungen, z.B. Darstellung von Inhalten
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Was is XML?}
+	
+  \begin{itemize}
+    \item Hierarchisch (semi-) strukturierte Daten
+    \item Organisiert als XML Dokument
+	\item Ein XML Dokument ist eine Zeichenfolge
+	\item Strukturierte Daten als Textdatei
+    \item XML ist Menschen und Maschinen lesbar
+    \item Texteditor wie Notepad genügt um XML zu lesen und schreiben
+    \item XML ist selbstbeschreibend
+    \item XML is plattform- und implementationsunabhängig
+    \item Standard für viele Office Produkte, z.B. LibreOffice
+  \end{itemize}
+	
+\end{frame}
+
+\lstset{language=XML}
+
+\begin{frame}[fragile]{Beispiel: XML Dokument}
+	\begin{lstlisting}
+	<planets>
+	  <planet>Mercury</planet>
+	  <planet>Venus</planet>
+	  <planet>Earth</planet>
+	  <planet>Mars</planet>
+	  <planet>Jupiter</planet>
+	  <planet>Saturn</planet>
+	  <planet>Uranus</planet>
+	  <planet>Neptune</planet>
+	  <planet>Pluto</planet>
+	</planets>
+	\end{lstlisting}	
+\end{frame}
+
+\begin{frame}[fragile]{Beispiel: SVG}
+	\small
+	\begin{lstlisting}
+	<?xml version="1.0" encoding="utf-8"?>
+	<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+	<svg version="1.1" 
+		id="Layer_1" 
+		xmlns="http://www.w3.org/2000/svg" 
+		xmlns:xlink="http://www.w3.org/1999/xlink" 
+		x="0px" y="0px" width="510px" height="510px" 
+		viewBox="0 0 510 510" 
+		enable-background="new 0 0 510 510" 
+		xml:space="preserve">
+
+		<rect x="5" y="5" fill="none" stroke="#000000" 
+			stroke-width="10" stroke-miterlimit="10" 
+			width="500" height="500"/>
+	</svg>
+	\end{lstlisting}	
+\end{frame}
+
+\begin{frame}{Warum XML?}
+	
+	\begin{itemize}
+		\item Verbreitete Sprache
+		\item Oft benutzt um Daten zwischen Anwendungen auszutauschen
+		\item Insbesondere im Datenaustausch über das Internet (Web)
+		\item XML Kenntnisse für Softwareentwicklung wichtig
+		\item Heute keine Auszeichnung mehr, wird einfach angenommen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Lehrveranstaltung BIM-108-01}
+	
+	\begin{itemize}
+		\item Bachelor-Studiengang Informationsmanagement
+		\item Pflichtmodul BIM-108---Datenstrukturierung (2. Semester)
+		\item Lehrveranstaltung BIM-108-01---Grundlagen XML und RDF
+		\item Ansprechperson HSH: Prof. Dr. Christian Wartena
+		\item Keine Voraussetzungen 
+	\end{itemize}
+	
+	\vspace{0.5cm}
+	
+	\url{http://infom.wp.hs-hannover.de/wp-content/uploads/2017/08/StudienhandbuchBIMA5.pdf}
+		
+\end{frame}
+
+\begin{frame}{Veranstaltungsübersicht}
+	
+	\scriptsize
+	\begin{center}
+	\begin{tabular}{rrp{7cm}}
+	  & Tag  & Thema \\
+	\hline
+	1 & 5. März  & Einführung in XML \\
+	2 & 12. März & XML: Fortgeschrittene Themen \\
+	3 & 19. März & XPath \\
+	4 & 26. März & Schema: Document Type Definition (DTD) \\
+	5 & 9. April  & Schema: XML Schema \\
+	6 & 16. April & Einführung in RDF \\
+	7 & 23. April & RDF Syntax: Eine breite Wahl \\
+	8 & 30. April & RDF: Fortgeschrittene Themen \\
+	9 & 7. Mai  & SPARQL: Die RDF Abfragesprache \\
+	10 & 14. Mai & SPARQL: Fortgeschrittene Themen \\
+	11 & 28. Mai & Einführung in RDF Schema \\
+	12 & 4. Juni & Ontologien mit RDF Schema \\
+	13 & 11. Juni & Tools für RDF \\
+	14 & 18. Juni & XML und RDF: Rückschau und Ausblick \\
+	15 & (?) 25. Juni & Klausur \\
+	\hline
+	\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{Prüfungsform}
+	
+	\begin{itemize}
+		\item Noch nicht festgelegt, mehr Information im April
+		\item Voraussichtlich 2-stündige schriftliche Klausur
+		\item Zusammengelegt mit BIM-108-02 (Inhaltserschliessung I - Methoden)
+		\item Termin voraussichtlich am 25. Juni
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Literatur}
+	
+	\begin{itemize}
+		\item Margit Becher. XML: DTD, XML-Schema, XPath, XQuery, XSLT, XSL-FO, SAX, DOM. 2009, Springer (Deutsch)	
+		\item Pascal Hitzler, Markus Krötzsch, Sebastian Rudolph. Foundations of Semantic Web Technologies. 2010, CRC Press. (Englisch)
+		\item Pascal Hitzler, Markus Krötzsch, Sebastian Rudolph, York Sure. Semantic Web: Grundlagen. 2008, Springer. \url{https://doi.org/
+			10.1007/978-3-540-33994-6} (Deutsch) 
+		\item \url{https://www.w3schools.com}
+		\item Weitere online Ressourcen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Übersicht}
+	
+	\begin{itemize}
+		\item Geschichte
+		\item Sprachkonstrukte
+		\item Wohlgeformtheit
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML: Geschichte}
+	
+	\begin{itemize}
+		\item Entwicklung GML (Goldfarb, Mosher und Lorie, IBM) in 70er Jahren
+		\item Sprache zur Auszeichnung von technischen Dokumenten
+		\item Daraus wurde die Standard Generalised Markup Language (ISO, 1986)
+		\item Spezifikation zur Definition von Auszeichnungssprachen
+		\item HTML wurde die bekannte Anwendung von SGML
+		\item Die Verbreitung von HTML führte zu Probleme
+		\item Wie z.B. unterschiedliche Interpretation in Browsern
+		\item Nicht geeignet für Speicherung und Austausch von Daten
+		\item Entwicklung XML, zweite Hälfte 90er Jahren
+		\item Seit 1998 eine W3C Recommendation
+		\item Wie SGML eine Metasprache aber einfacher zu implementieren
+		\item Anders als HTML, strenge Einhaltung der Sprachregeln
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML Sprachkonstrukte}
+	
+	\begin{itemize}
+		\item \emph{Comment}
+		\item \emph{Tag}
+		\item \emph{Element}
+		\item \emph{Attribute}
+		\item \emph{Document}
+		\item \emph{Namespace}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Sprachkonstrukte: \emph{Comment}}
+	
+	\begin{itemize}
+		\item Kommentare sind erlaubt
+		\item Diese stehen zwischen den Zeichen \texttt{<!--} und \texttt{-->}
+		\item Beispiel: \texttt{<!-- Das ist ein Kommentar -->}
+		\item Kommentare dürften die Zeichen \texttt{--} nicht enthalten
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Sprachkonstrukte: \emph{Tag}}
+	
+	\begin{itemize}
+		\item Ein \emph{tag} beginnt mit Zeichen \texttt{<} und endet mit Zeichen \texttt{>}
+		\item Beispiel: \texttt{<planet>}
+		\item Es gibt drei \emph{tag} Arten
+		\begin{itemize}
+			\item Das \emph{opening tag}, z.B. \texttt{<planet>}
+			\item Das \emph{closing tag}, z.B. \texttt{</planet>}
+			\item Das \emph{empty-element tag}, z.B. \texttt{<planet/>}
+		\end{itemize}
+		\item Beachte \emph{tag} Gross- und Kleinschreibung
+			\item Die \emph{tags} \texttt{<planet>} und \texttt{<Planet>} sind nicht gleich
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Sprachkonstrukte: \emph{Element}}
+	
+	\begin{itemize}
+		\item Ein \emph{element} (Element) ist ein Objekt welches 
+		\begin{itemize}
+			\item Mit einem \emph{opening tag} beginnt 
+			\item Mit einem \textbf{entsprechenden} \emph{closing tag} endet
+		\end{itemize}
+		\item Beispiel: \texttt{<planet>Earth</planet>}
+		\item Bedenke Gross- und Kleinschreibung
+		\item \emph{Closing tag} \texttt{</Planet>} entspricht nicht dem \emph{opening tag} \texttt{<planet>}
+		\item Ein Element kann leer sein
+		\item Beispiel: \texttt{<planet></planet>} oder Kurzform \texttt{<planet/>}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Element}}
+	
+	\begin{itemize}
+		\item Ein Element beinhaltet Text oder andere Elemente
+		\item Beispiele
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <!-- Element containing text -->
+  <planet>Earth</planet>
+	
+  <!-- Element containing other elements -->
+  <planets>
+    <planet>Earth</planet>
+    <planet>Mars</planet>
+  </planets>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Element}}
+	
+	\begin{itemize}
+		\item Die Zeichen \texttt{<} und \texttt{\&} sind in Text nicht erlaubt
+		\item Diese müssen als \texttt{\&lt;} und \texttt{\&amp;} entsprechend kodiert werden
+		\item Zudem sollten die Zeichen \texttt{>}, \texttt{'}, und \texttt{"} ebenfalls kodiert werden
+		\item Alternative: \texttt{<![CDATA[ ... ]]>}
+		\item Beispiele
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <planet>Mars radius is &lt; that of Earth</planet>
+	
+  <planet>Earth is &quot;the only place where 
+    life is known to exist&quot;</planet>
+	  
+  <planet><![CDATA[
+    Mars radius is < that of Earth
+  ]]></planet>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Element}}
+	
+	\begin{itemize}
+		\item Elemente müssen korrekt verschachtelt werden
+		\item Beispiel
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <!-- Korrekte Verschachtelung -->
+  <planets><planet>Earth</planet></planets>
+	
+  <!-- Inkorrekte Verschachtelung -->
+  <planets><planet>Earth</planets></planet>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Attribute}}
+	
+	\begin{itemize}
+		\item \emph{Opening} und \emph{empty-element tags} können Attribute enthalten
+		\item Diese stehen innerhalb der \texttt{<} und \texttt{>} Klammern
+		\item Als \texttt{name="value"} Paare 
+		\item Wobei \texttt{name} im Element eindeutig sein muss
+		\item Attribute enthalten für das Element relevante Daten
+		\item Beispiel
+	\end{itemize}
+	
+	\begin{lstlisting}
+	<planet name="Earth" radius="6371 km"/>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Element} oder \emph{Attribute}}
+	
+	\begin{itemize}
+		\item Es gibt keine Regeln zur Verwendung von \emph{element} oder \emph{attribute}
+		\item Das folgende Beispiel enthält die gleiche Information
+		\item Wobei \texttt{name} und \texttt{radius} anders verwendet werden
+	\end{itemize}
+	
+	\begin{lstlisting}
+	<planet>
+	  <name>Earth</name>
+	  <radius>6371 km</radius>
+	</planet>
+	
+	<planet name="Earth" radius="6371 km"/>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Element} oder \emph{Attribute}}
+	
+	\begin{itemize}
+		\item Ein Element kann mehrere Werte enthalten und ist erweiterbar 
+	\end{itemize}
+	
+	\begin{lstlisting}
+	<planet>
+	  <radius>6371 km</radius>
+	</planet>
+	
+	<planet>
+	  <radius>
+	    <length>6371</length>
+	    <unit>km</unit>
+	  </radius>
+	</planet>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Document}}
+	
+	\begin{itemize}
+		\item Ein XML \emph{document} (Dokument) ist ein Textdokument
+		\item Beginnt mit einer (optionalen) \emph{declaration}
+		\item Keine Leerzeichen davor
+		\item Versionsnummer und (optional) die Kodierung (meist \texttt{utf-8})
+		\item Ein XML Dokument muss genau ein (äusserstes) Element enthalten \item Dieses wird \emph{root element} (Wurzelelement) genannt
+		\item Beispiel
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <?xml version="1.0" encoding="utf-8"?>
+  <planets/>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Sprachkonstrukte: \emph{Namespace}}
+	
+	\begin{itemize}
+		\item Vermeidung von Namenskonflikte
+		\item Beispiel: \texttt{<planet>} der Himmelskörper oder die Software?
+		\item Diese haben meist unterschiedliche Attribute
+		\item Verwendung von Namespräfix
+		\item Beispiel: \texttt{<astro:planet>} und \texttt{<soft:planet>}
+		\item Bedarf der Definition von \emph{namespaces} (Namensräume)
+		\item Namensraum Definition als Attribut in (Wurzel-) Element
+		\item Beispiel
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <planets>
+    <astro:planet xmlns:astro="http://astronomy.org">
+      <astro:name>Earth</astro:name>
+    </astro:planet>
+  </planets>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Wohlgeformtheit}
+	
+	\begin{itemize}
+		\item Ist ein XML Dokument syntaktisch korrekt ist es wohlgeformt
+		\item Wohlgeformtheit (\emph{well-formed}) erwartet, unter anderem
+		\begin{itemize}
+			\item Genau ein Wurzelelement
+			\item Elemente müssen korrekt strukturiert sein
+			\item Korrekte Verschachtelung der Elemente
+		\end{itemize} 
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Zusammenfassung}
+	
+	\begin{itemize}
+		\item XML ist eine erweiterbare Auszeichnungssprache
+		\item Metasprache zur Spezifikation von Auszeichnungssprachen
+		\item Wichtige Sprachkonstrukte: \emph{Tag}, \emph{Element}, \emph{Attribute}, \emph{Document}
+		\item Wichtiges Konzept: Wohlgeformtheit
+		\item Weit verbreitet, insb. im Datenaustausch (Web)
+		\item XML Kenntnisse generell vorausgesetzt in ICT
+	\end{itemize}
+	
+\end{frame}
+
+\end{document}
