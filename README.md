@@ -58,7 +58,7 @@ cp notebooks/lecture-NN/lecture-NN.ipynb ../bim-108-01-solutions/
 * Jupyter Notebook starten
 * Nach `bim-108-01-solutions` navigieren und `lecture-NN.ipynb` öffnen
 
-#### Übung N Einreichen
+#### Übung NN Einreichen
 
 * Übung in Jupyter Notebook speichern
 * Jupyter Notebook verlassen
