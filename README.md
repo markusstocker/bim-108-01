@@ -36,28 +36,27 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 * [GitHub](https://github.com) Account eröffnen oder einloggen, falls vorhanden
 * Neues Repository `bim-108-01-solutions` erstellen
 * "Git Bash Here" auf Desktop mittels rechter Maustaste
-* In Git Bash, folgende Befehle ausführen ([USERNAME] entsprechend ersetzen)
+* In Git Bash, folgende Befehle ausführen (USERNAME entsprechend ersetzen)
 
 ``` 
 git clone https://markusstocker@github.com/markusstocker/bim-108-01.git
-git clone https://[USERNAME]@github.com/[USERNAME]/bim-108-01-solutions.git
+git clone https://USERNAME@github.com/USERNAME/bim-108-01-solutions.git
 ``` 
 
-#### Übung N Ausführen
+#### Übung NN Ausführen
 
-* N steht für die Übungsnummer: 01, 02, ...
+* NN steht für die Übungsnummer: 01, 02, ...
 * In Git Bash, folgende Befehle ausführen
 
 ```
 cd bim-108-01/
 git pull
-cp notebooks/lecture-N/lecture-N.ipynb ../bim-108-01-solutions/
+cp notebooks/lecture-NN/lecture-NN.ipynb ../bim-108-01-solutions/
 ```
 
 * Anaconda Navigator starten
 * Jupyter Notebook starten
-* Nach `Desktop/bim-108-01-solutions` navigieren
-* Und `lecture-N.ipynb` öffnen
+* Nach `bim-108-01-solutions` navigieren und `lecture-NN.ipynb` öffnen
 
 #### Übung N Einreichen
 
@@ -67,8 +66,7 @@ cp notebooks/lecture-N/lecture-N.ipynb ../bim-108-01-solutions/
 
 ```
 cd bim-108-01-solutions/
-git add lecture-N.ipynb
-git commit -a -m "solution to exercise N"
+git add lecture-NN.ipynb
+git commit -a -m "solution to exercise NN"
 git push
 ```
-
