@@ -1,0 +1,84 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{darkblue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\title{Einführung in XML: Übungen}
+\author{Markus Stocker}
+\date{5. März 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Übungen zur Vorlesung}
+  
+  \begin{itemize}
+  	\item Jede Vorlesung wird mit Übungen begleitet
+  	\item Übungen werden als Jupyter Notebooks durchgeführt
+  	\item Webbasierte interaktive Programmierung
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Voraussetzungen}
+	
+	\begin{itemize}
+		\item Anaconda: \url{https://www.anaconda.com/download/}
+		\item Git Client: \url{https://git-scm.com/downloads}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Anleitung}
+	
+	\begin{itemize}
+		\item "Git Bash Here" auf Desktop mittels rechter Maustaste
+		\item Im Fenster, folgender Befehl ausführen
+	\end{itemize}
+
+    \scriptsize
+	\begin{verbatim}
+  git clone https://markusstocker@github.com/markusstocker/bim-108-01.git
+	\end{verbatim}
+	
+	\normalsize
+	\begin{itemize}
+		\item Anaconda Navigator starten
+		\item Jupyter Notebook starten
+		\item Nach \texttt{Desktop/bim-108-01/notebooks/lecture-N} navigieren
+		\item Und \texttt{lecture-N.ipynb} öffnen
+	\end{itemize}
+	
+\end{frame}
+
+\end{document}

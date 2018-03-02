@@ -1,0 +1,9 @@
+*.toc
+*.synctex.gz
+*.snm
+*.out
+*.nav
+*.log
+*.aux
+*.vrb
+*checkpoint.ipynb
