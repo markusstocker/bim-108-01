@@ -49,7 +49,9 @@ git clone https://[USERNAME]@github.com/[USERNAME]/bim-108-01-solutions.git
 * In Git Bash, folgende Befehle ausführen
 
 ```
-cp bim-108-01/notebooks/lecture-N/lecture-N.ipynb bim-108-01-solutions/
+cd bim-108-01/
+git pull
+cp notebooks/lecture-N/lecture-N.ipynb ../bim-108-01-solutions/
 ```
 
 * Anaconda Navigator starten
