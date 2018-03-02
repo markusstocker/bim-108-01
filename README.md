@@ -61,6 +61,8 @@ cp notebooks/lecture-N/lecture-N.ipynb ../bim-108-01-solutions/
 
 #### Übung N Einreichen
 
+* Übung in Jupyter Notebook speichern
+* Jupyter Notebook verlassen
 * In Git Bash, folgende Befehle ausführen
 
 ```
