@@ -36,7 +36,7 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 * [GitHub](https://github.com) Account eröffnen oder einloggen, falls vorhanden
 * Neues Repository `bim-108-01-solutions` erstellen
 * "Git Bash Here" auf Desktop mittels rechter Maustaste
-* In Git Bash, folgende Befehle ausführen
+* In Git Bash, folgende Befehle ausführen ([USERNAME] entsprechend ersetzen)
 
 ``` 
 git clone https://markusstocker@github.com/markusstocker/bim-108-01.git
