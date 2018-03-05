@@ -50,24 +50,27 @@ git clone https://USERNAME@github.com/USERNAME/bim-108-01-solutions.git
 * In Git Bash, folgende Befehle ausführen
 
 ```
+mkdir bim-108-01-solutions/lecture-NN
 cd bim-108-01/
 git pull
-cp notebooks/lecture-NN/lecture-NN.ipynb ../bim-108-01-solutions/
+cp notebooks/lecture-NN/* ../bim-108-01-solutions/lecture-NN/
 ```
 
 * Anaconda Navigator starten
 * Jupyter Notebook starten
-* Nach `bim-108-01-solutions` navigieren und `lecture-NN.ipynb` öffnen
+* In Jupyter Notebook, nach `bim-108-01-solutions/lecture-NN` navigieren 
+* Das Notebook `lecture-NN.ipynb` öffnen
+* Viel Erfolg!
 
 #### Übung NN Einreichen
 
-* Übung in Jupyter Notebook speichern
-* Jupyter Notebook verlassen
+* Übung in Jupyter Notebook speichern (File -> Save and Checkpoint)
+* Jupyter Notebook verlassen (File -> Close and Halt)
 * In Git Bash, folgende Befehle ausführen
 
 ```
 cd bim-108-01-solutions/
-git add lecture-NN.ipynb
+git add lecture-NN
 git commit -a -m "solution to exercise NN"
 git push
 ```
