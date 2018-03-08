@@ -50,17 +50,6 @@
 
 \maketitle
 
-\begin{frame}{Rekapitulation: Das ist ein ...}
-	
-	\texttt{<?xml version="1.0" encoding="utf-8"?>} \newline
-	\texttt{<!-- Yet another example -->} \newline
-	\texttt{<a:planets xmlns:a="http://astronomy.org">} \newline
-	\texttt{<a:planet radius="6371 km">Earth</a:planet>} \newline
-	\texttt{<a:planet><![CDATA[Mars]]></a:planet>} \newline
-	\texttt{</a:planets>}
-	
-\end{frame}
-
 \begin{frame}{Rekapitulation: Das ist eine ...}
 	
 	\SoulColor\hl{\texttt{<?xml version="1.0" encoding="utf-8"?>}} \newline
@@ -152,10 +141,20 @@
 \begin{frame}{Dieses XML Dokument ist nicht wohlgeformt weil ...}
 	
 	\texttt{<a:planets xmlns:a="http://astronomy.org">} \newline
-	\texttt{<a:planet radius="6371 km">Earth < Mars</a:Planet>} \newline
-	\texttt{<a:planet>![CDATA[Mars is ]]> next frontier]]></a:planets>} \newline
+	\texttt{<b:planet radius="6371 km">Earth < Mars<a:Planet />} \newline
+	\texttt{<a:planet> ![CDATA[Mars is ]]> next frontier]]></a:planets>} \newline
 	\texttt{</a:planet>}
 	\texttt{<!-- Yet another -- example -->} \newline
+	
+\end{frame}
+
+\begin{frame}{Dieses XML Dokument ist nicht wohlgeformt weil ...}
+	
+	\texttt{<a:planets xmlns:a="http://astronomy.org">} \newline
+	\texttt{<\SoulColor\hl{b}:planet radius="6371 km">Earth \SoulColor\hl{<} Mars<a:\SoulColor\hl{Planet} \SoulColor\hl{/}>} \newline
+	\texttt{<a:planet>\SoulColor\hl{ }![CDATA[Mars is \SoulColor\hl{]]>} next frontier]]></a:\SoulColor\hl{planets}>} \newline
+	\texttt{</a:\SoulColor\hl{planet}>}
+	\texttt{<!-- Yet another \SoulColor\hl{--} example -->} \newline
 	
 \end{frame}
 
@@ -176,8 +175,8 @@
 \begin{frame}{Baumstruktur}
 	
 	\begin{itemize}
-		\item Die Struktur der Elemente eines XML Dokumentes ergibt ein Baum
-		\item Dokument enthält ein einziges \emph{root element}
+		\item Die Struktur der Elemente eines XML Dokuments ergibt ein Baum
+		\item Dokument enthält ein einziges Wurzelelement (\emph{root element})
 		\item Das Element an der Spitze des Baumes
 		\item Element kann ein oder mehrere ``Kindelemente'' (\emph{child}) enthalten
 		\item Diese sind dem ``Elternelement'' (\emph{parent}) untergeordnet
@@ -185,7 +184,7 @@
 	
 \end{frame}
 
-\begin{frame}[fragile]{Baumstruktur}
+\begin{frame}[fragile]{Baumstruktur und -traversierung}
 	
 	\begin{columns}[T] % align columns
 		\begin{column}{.40\textwidth}
@@ -223,9 +222,9 @@
 	
 	\begin{itemize}
 		\item Dass Daten in XML vorliegen bedeutet nicht, dass diese nützlich sind
-		\item Programme A und B können Zeichnungen als XML speichern
-		\item Bedeutet nicht, dass die Zeichnungen austauschbar sind
-		\item Austauschbarkeit bedarf gemeinsame Festlegung auf ein Vokabular
+		\item Programme A und B können ein Bild als XML speichern
+		\item Bedeutet nicht, dass die Bilder austauschbar sind
+		\item Austauschbarkeit bedarf gemeinsamer Festlegung auf ein Vokabular
 		\item Auch ``Standard'' genannt, z.B. Scalable Vector Graphics (SVG)
 	\end{itemize}
 	
@@ -238,6 +237,7 @@
 		\item Entweder ein existierendes aufnehmen (z.B. einen Standard)
 		\item Oder zumindest darauf aufbauen
 		\item Oder aber mit der community ein Vokabular erstellen
+		\item Zum Beispiel weil noch kein (vernünftiges) existiert
 	\end{itemize}
 	
 \end{frame}
@@ -247,7 +247,6 @@
 	\begin{itemize}
 		\item Wie man Daten in XML strukturiert ist entscheidend
 		\item Eine Anwendung erwartet eine gewisse Struktur
-		\item Anwendungen werden anhand einer Struktur entwickelt
 	\end{itemize}
 	
 	\begin{columns}[T] % align columns
@@ -278,10 +277,9 @@
 \begin{frame}{Vokabularien in XML}
 	
 	\begin{itemize}
-		\item \emph{Tags} haben für Software keinerlei Bedeutung
+		\item \emph{Tag} Namen haben für Software keinerlei Bedeutung
 		\item Ob \texttt{<planet>Earth</planet>} oder \texttt{<x>Earth</x>}
-		\item Für Software macht dies kein (grosser) Unterscheid
-		\item Nur die Baumstruktur ist für die Software von Bedeutung
+		\item Nur die Baumstruktur ist für Software von Bedeutung
 		\item Selbstbeschreibend ist XML also hauptsächlich für Menschen
 		\item Jedoch ist XML selbst für Menschen oft nicht einfach zu verstehen
 		\item Weil die Bedeutung der \emph{tags} oft nicht klar ist
@@ -294,7 +292,7 @@
 	\begin{itemize}
 		\item XML ist in gängigen Programmiersprachen les- und schreibar
 		\item Und zwar aus den verschiedesten Sourcen
-		\item Lesen aus \texttt{string} haben wir bereits gesehen
+		\item Lesen aus \texttt{string} haben wir in letzter Übung bereits gesehen
 		\item Möglich ist auch das Lesen und Schreiben aus/zu 
 		\begin{itemize}
 			\item Dateien
@@ -368,8 +366,8 @@ planets = et.fromstring("""
 """)
 
 for planet in planets:
-  for quality in planet:
-    print('{}: {}'.format(quality.tag, quality.text))
+  for characteristic in planet:
+    print('{}: {}'.format(characteristic.tag, characteristic.text))
     
 name: Earth
 radius: 6371
@@ -394,8 +392,8 @@ name: Mars
 \begin{frame}{XML und Web Services}
 	
 	\begin{itemize}
-		\item XML besonders im Internet Datenaustausch verbreitet
-		\item Viele Web Services and Web API liefern Daten in XML
+		\item XML besonders für Datenaustausch im Internet verbreitet
+		\item Viele Web Services and Web APIs liefern Daten in XML
 		\item Allerdings nimmt die Bedeutung anderer Formate zu (z.B. JSON)
 	\end{itemize}
 	
@@ -450,7 +448,7 @@ print(x.find(
 		\item Das \texttt{tagging} ist ``Ballast''
 		\item Speziell bei stark regulären Daten (z.B. Tabellen) 
 		\item Grosser Speicherbedarf und Bandbreite
-		\item Problematisch wenn diese fehlen, z.B. Sensordaten
+		\item Problematisch wenn diese fehlen, z.B. Sensornetzwerke
 	\end{itemize}
 	
 \end{frame}
@@ -458,7 +456,11 @@ print(x.find(
 \begin{frame}{Zusammenfassung}
 	
 	\begin{itemize}
-		\item
+		\item XML Dokument ergibt Baumstruktur
+		\item Mit XML kann man Vokabularien erstellen
+		\item Sich auf einen Standard festlegen ist nützlich
+		\item XML kann man programmatisch erstellen und verarbeiten
+		\item XML weit verbreitet im Internet Datenaustausch
 	\end{itemize}
 	
 \end{frame}
