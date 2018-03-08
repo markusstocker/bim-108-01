@@ -1,0 +1,16 @@
+<discography>
+    <albums>
+        <album>
+            <title>The Dark Side of the Moon</title>
+            <released day="16" month="March" year="1973" />
+        </album>
+        <album>
+            <title>The Wall</title>
+            <released>
+                <day>30</day> 
+                <month>November</month>
+                <year>1979</year>
+            </released>
+        </album>
+    </albums>
+</discography>
