@@ -1,0 +1,61 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{darkblue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\begin{document}
+
+\begin{frame}[fragile]
+  
+  \small
+  \begin{lstlisting}
+Auf Desktop in Git Bash
+  mkdir bim-108-01-solutions/lecture-02
+  cd bim-108-01/
+  git pull
+  cp notebooks/lecture-02/* ../bim-108-01-solutions/lecture-02/
+
+Anaconda Navigator 
+oder Anaconda Prompt (und auf Laufwerk Z wechseln)
+
+Uebung durchfuehren ...
+
+Zum Schluss, auf Desktop in Git Bash
+  cd bim-108-01-solutions/
+  git add lecture-02
+  git commit -a -m "solution to exercise 02"
+  git push
+  \end{lstlisting}
+  
+\end{frame}
+
+\end{document}
