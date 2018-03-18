@@ -1,0 +1,156 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{darkblue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\begin{document}
+
+\begin{frame}{GitHub URL Mitgeteilt}
+	
+	\footnotesize
+	\fboxsep=0pt
+	\noindent%
+		\begin{minipage}[t]{0.30\linewidth}
+			Ahmed Soueid \\
+			Alina Möller \\
+			Anna Selitski \\
+			Anna-Lisa Voigt \\
+			Ardiana Muli \\
+			Arvanitis Konsti\\
+			Asena-Feray Binatli \\
+			Bekir Erdogan \\
+			Benjamin Irmer \\
+			Can Kaptan \\
+			Cäcilia Schröer \\
+			Constantin Schreiber \\
+			Dennis Tobola \\
+			Duygu Acar \\
+			Ehsan Maktabi\\ 
+			Ela-nur Oezenc \\
+			Elif Kilinc \\
+			Gramoz Avdyli \\
+		\end{minipage}%
+	\hfill%
+		\begin{minipage}[t]{0.30\linewidth}
+			Haci-Mehmet Oezdemir \\
+			Hagen Freiburger\\
+			Hassan Rizk \\
+			Jerome Schulte\\
+			Jiwan Khalil\\
+			Jonas Henßel\\
+			Julia Beletzki\\
+			Julia Karaschewski\\
+			Kaan Kavacik\\
+			Kenan D. Aker\\
+			Larissa Dykmann\\
+			Lena Gericke\\
+			Lena-Maria Krick\\
+			Lennard Stittgen\\
+			Linda Khorami\\
+			Lisa Klingsporn\\
+			Lisa Lindemaier\\
+		\end{minipage}
+	\hfill%
+		\begin{minipage}[t]{0.30\linewidth}
+			Marius Hentze \\
+			Melanie Hartkopf\\
+			Mohammad-Hossain Sakhizada\\
+			Nathalie Schill\\
+			Nick Haupka\\
+			Nick Jäger\\
+			Nils Kai Eicke\\
+			Özge B\\
+			Pascal Wissner\\
+			Sebastian Schumacher\\
+			Serkan Sarica\\
+			Songuel Yaraneri\\
+			Sophie Rückert\\
+			Stephanie-Desiree Ossarek\\
+			Timo Betker\\
+			Viktoriya Tsynman\\
+			Vivien Hirschberger\\
+		\end{minipage}
+	
+\end{frame}
+
+\begin{frame}{Übung(en) Eingereicht}
+	
+	\fboxsep=0pt
+	\noindent%
+	\begin{minipage}[t]{0.48\linewidth}
+		Can Kaptan \\
+		Cäcilia Schröer \\
+		Dennis Tobola \\
+		Haci-Mehmet Oezdemir \\
+		Hagen Freiburger \\
+		Julia Karaschewski \\
+		Lennard Stittgen \\
+		Linda Khorami \\
+		Nathalie Schill \\
+		Nick Haupka \\
+		Nick Jäger \\
+		Pascal Wissner \\
+		Sebastian Schumacher \\
+		Viktoriya Tsynman \\
+		Vivien Hirschberger
+	\end{minipage}%
+	
+\end{frame}
+
+\begin{frame}[fragile]
+  
+  \small
+  \begin{lstlisting}
+Auf Desktop in Git Bash
+  mkdir bim-108-01-solutions/lecture-03
+  cd bim-108-01/
+  git pull
+  cp notebooks/lecture-03/* ../bim-108-01-solutions/lecture-03/
+
+Anaconda Navigator 
+oder Anaconda Prompt und folgende Befehle
+  Z:
+  cd Desktop
+  jupyter notebook
+
+Uebung durchfuehren ...
+
+Zum Schluss, auf Desktop in Git Bash
+  cd bim-108-01-solutions/
+  git add lecture-03
+  git commit -a -m "solution to exercise 03"
+  git push
+  \end{lstlisting}
+  
+\end{frame}
+
+\end{document}
