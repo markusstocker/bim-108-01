@@ -55,8 +55,16 @@
 	\begin{itemize}
 		\item Wie kommt es, dass ein XML Dokument eine Baumstruktur hat?
 		\item Warum ist die Festlegung auf ein gemeinsames Vokabular wichtig?
-		\item Wie unterstützen Programmiersprachen die Verarbeitung von XML?
 		\item Was bedeutet Wohlgeformtheit?
+		\item Wieviele Wurzelelemente kann ein XML Dokument haben?
+		\item Was ist 
+		\begin{itemize}
+			\item \texttt{<planet>}
+			\item \texttt{</planet>}
+			\item \texttt{<planet/>}
+			\item \texttt{name="Earth"}
+			\item \texttt{<planet>Earth</planet>}
+		\end{itemize}
 	\end{itemize}
 	
 \end{frame}
@@ -64,31 +72,32 @@
 \begin{frame}{Übersicht}
 	
 	\begin{itemize}
-		\item Was is XPath
+		\item Was ist XPath
 		\item XPath Konzepte
 		\item Beispiele
 	\end{itemize}
 	
 \end{frame}
 
-\begin{frame}{What is XPath}
+\begin{frame}{Was ist XPath}
 	
 	\begin{itemize}
 		\item Mit XML kann man Daten strukturieren
-		\item Man kann diese in Mensch- und Maschinenlesbarer form speichern
+		\item Man kann diese in mensch- und maschinenlesbarer Form speichern
 		\item Nicht nur in Dateien sondern auch in Datenbanken
 		\item Toll, aber letztlich muss man diese Daten flexibel verarbeiten können
 		\item Dafür immer Programme zu schreiben ist mühsam
 		\item Man benötigt Verarbeitungssprachen
+		\item Davon gibt es mehrere, XPath ist eine
 	\end{itemize}
 	
 \end{frame}
 
-\begin{frame}{What is XPath}
+\begin{frame}{Was ist XPath}
 	
 	\begin{itemize}
 		\item Sprache zur Verarbeitung von XML Dokumenten
-		\item Auf Teile eines XML Dokumentes zugreifen
+		\item Auf Teile eines XML Dokuments zugreifen
 		\item Navigation durch Elemente und Attribute
 		\item Selektion von Elementen und Inhalten
 		\item Einfache Operationen auf Inhalten
@@ -96,14 +105,14 @@
 	
 \end{frame}
 
-\begin{frame}{Knoten (\emph{node})}
+\begin{frame}{Konzepte: Knoten (\emph{node})}
 	
 	\begin{itemize}
 		\item XPath modelliert ein XML Dokument als Knotenbaum
 		\item Es gibt 7 Knotenarten
 		\begin{itemize}
 			\item \emph{Root node}, der virtuelle Elternknoten des Wurzelelements
-			\item \emph{Element node}, z.B. \texttt{<planet>}
+			\item \emph{Element node}, z.B. \texttt{<planet> ... </planet>}
 			\item \emph{Attribute node}, z.B. \texttt{radius="6371"}
 			\item \emph{Text node}, \texttt{CDATA}
 			\item \emph{Namespace node}
@@ -115,10 +124,10 @@
 	
 \end{frame}
 
-\begin{frame}{Achsen (\emph{axis})}
+\begin{frame}{Konzepte: Achsen (\emph{axis})}
 	
 	\begin{itemize}
-		\item Navigation mittels XPath erfolgt von einem Kontextknoten
+		\item Navigation mittels XPath erfolgt aus einem Kontextknoten
 		\item Achsen bezeichnen Verwandtschaftsverhältnisse zum Kontextknoten
 		\item Dreizehn unterschiedlichen Achsen
 	\end{itemize}
@@ -133,7 +142,7 @@
 		\item \emph{parent}: Elternelement des Kontextknotens
 		\item \emph{preceding-sibling}: Vorgängige Geschwister des Kontextknotens
 		\item \emph{following-sibling}: Nachfolgende Geschwister des Kontextknotens
-		\item \emph{anchestor}: Vorfahren des Kontextknotens
+		\item \emph{ancestor}: Vorfahren des Kontextknotens
 		\item \emph{descendant}: Nachkommen des Kontextknotens
 	\end{itemize}
 	
@@ -203,7 +212,7 @@
 	
 \end{frame}
 
-\begin{frame}[fragile]{Achsen: \emph{anchestor}, die Vorfahren}
+\begin{frame}[fragile]{Achsen: \emph{ancestor}, die Vorfahren}
 	
 	\centering
 	\begin{tikzpicture}[sibling distance=10em, node/.style = {shape=rectangle, draw, align=center, fill=white, minimum height=10mm, minimum width=10mm}, selected/.style = {shape=rectangle, draw, align=center, fill=gray!20, minimum height=10mm, minimum width= 10mm}]
@@ -235,25 +244,23 @@
 	
 \end{frame}
 
-\begin{frame}{Lokalisierungspfade}
+\begin{frame}{Konzepte: Lokalisierungspfad}
 	
 	\begin{itemize}
-		\item Ermöglichen die Adressierung von Knoten oder Knotenmengen	
-		\item Setzen sich aus mehreren Einzelschritten zusammen
+		\item Ermöglicht die Adressierung von Knoten (-mengen)
+		\item Setzt sich generell aus mehreren Einzelschritten zusammen
 		\item Diese werden durch Schrägstriche (\texttt{/}) voneinander getrennt
 	\end{itemize}
 	
 \end{frame}
 
-\begin{frame}[fragile]{Lokalisierungspfade: Schritt (\emph{location step})}
+\begin{frame}[fragile]{Lokalisierungspfad: Schritt (\emph{location step})}
 	
 	\begin{itemize}
-		\item Bestandteile eines Schrittes
-		\begin{itemize}
-			\item Achse: Richtung in die aus dem Kontextknoten navigiert wird
-			\item Knotentest: Der gewünschte Knoten
-			\item Prädikat: Null, eins oder mehrere Filterbedingungen
-		\end{itemize}
+		\item Die Bestandteile eines Schrittes sind
+		\item Achse: Richtung in die aus dem Kontextknoten navigiert wird
+		\item Knotentest: Die gewünschte Knotenmenge
+		\item Prädikat: Null, eins oder mehrere Filterbedingungen
 		
 		\vspace{1cm}
 		\centering
@@ -277,7 +284,6 @@
   child::planets
   descendant::planet[name="Earth"]
   descendant::*
-	
 	\end{lstlisting}
 	
 \end{frame}
@@ -311,9 +317,7 @@
 \begin{frame}[fragile]{Absolute Lokalisierungspfade}
 	
 	\begin{itemize}
-		\item Ausgehend vom Wurzelknoten (nicht Wurzelelement)
 		\item Der erste Schrägstrich referenziert den Wurzelknoten
-		\item Ermöglicht auch die Adressierung von Kommentare
 	\end{itemize}
 		
 	\lstset{language=XML}
@@ -334,8 +338,7 @@
 \begin{frame}[fragile]{Relative Lokalisierungspfade}
 	
 	\begin{itemize}
-		\item Relative Pfade benötigen einen Kontextknoten
-		\item Der Pfad wird relativ zu diesem Knoten ausgewertet
+		\item Der Pfad wird relativ zum Kontextknoten ausgewertet
 	\end{itemize}
 	
 	\lstset{language=XML}
@@ -364,17 +367,13 @@
 	
 \end{frame}
 
-\begin{frame}{Prädikate}
+\begin{frame}[fragile]{Konzepte: Prädikate}
 	
 	\begin{itemize}
 		\item XPath Ergebnisse filtern
+		\item Prädikate schränken die Ergebnisse ein
 		\item Ermöglicht komplexere Problemstellungen
-		\item Indem eine genauere Zielmenge definiert werden kann
-		\item Ausdrücke die einen booleschen Wert liefern
-		\item Also, wahr oder falsch
-		\item Resultierende Knoten müssen auf Prädikate mit \emph{wahr} testen
-		\item XPath Ausdruck liefert eine Knotenmenge 
-		\item Diese wird mittels Prädikat Tests nochmals eingeschränkt
+		\item Indem eine genauere Zielmenge definiert wird
 	\end{itemize}
 	
 \end{frame}
@@ -443,10 +442,10 @@
 \begin{frame}[fragile]{Kaskadierende Prädikate}
 	
 	\begin{itemize}
-		\item Hintereinanderschaltung von Filtern
+		\item Hintereinanderschaltung von Prädikaten
 		\item Eine Knotenmenge wird gefiltert
-		\item Es resultiert ein Ergebnis
-		\item Dieses ist Ausgangsmente für das nächste Prädikat
+		\item Es resultiert eine Zielmenge
+		\item Diese ist Ausgangsmenge für das nächste Prädikat
 	\end{itemize}
 	
 	\lstset{language=XML}
@@ -481,11 +480,11 @@
 	
 \end{frame}
 
-\begin{frame}{Funktionen}
+\begin{frame}{Konzepte: Funktionen}
 	
 	\begin{itemize}
 		\item Erweiterte Operationen und Abfragen auf Knotentests
-		\item Stringanalyse von Textknoten und Attributwerten
+		\item Zum Beispiel, Stringanalyse von Textknoten und Attributwerten
 		\item Verwendung in XPath-Ausdrücken oder Prädikaten
 		\item Funktionen können ein Argument erhalten
 		\item Geben immer einen Wert zurück
@@ -522,7 +521,7 @@
 		\item XPath unterstützt die Verarbeitung von XML
 		\item Gezielt auf Inhalte zugreifen
 		\item Adressierung mittels Lokalisierungspfade
-		\item Resultierende Knotenmenge kann weiter eingeschrenkt werden
+		\item Resultierende Knotenmenge kann weiter eingeschränkt werden
 	\end{itemize}
 	
 \end{frame}
