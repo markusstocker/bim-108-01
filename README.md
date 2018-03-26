@@ -33,7 +33,7 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 * Auf [notebooks.azure.com](https://notebooks.azure.com/) anmelden
 * Teilen Sie die URL `https://notebooks.azure.com/USERNAME` dem Übungsleiter per Email mit (USERNAME ersetzen)
 * Im Menu, wählen Sie den Punkt `Libraries`
-* Wählen Sie `New Library` und benennen Sie Ihre neue Library `bim-108-01-solutions` (`Library Name` gleich wie `Library ID`, und setzen Sie den `Public library` Hacken)
+* Wählen Sie `New Library` und benennen Sie Ihre neue Library `bim-108-01-solutions` (`Library Name` gleich wie `Library ID`, und setzen Sie den `Public library` Haken)
 
 #### Übung NN Ausführen
 
