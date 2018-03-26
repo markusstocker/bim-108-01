@@ -74,3 +74,7 @@ git add lecture-NN
 git commit -a -m "solution to exercise NN"
 git push
 ```
+
+## Lizenz
+
+Sofern nicht anderes angegeben sind die Inhalte under der [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0) lizenziert.
