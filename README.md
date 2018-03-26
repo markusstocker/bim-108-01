@@ -24,7 +24,7 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 
 ## Übungen
 
-Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und können in zwei Variante durchgeführt und eingereicht werden. Variante I ist für den schnellen Einstieg. Variante II ist technisch anspruchsvoller dafür lernt man dabei zusätzlich wichtige Tools kennen.
+Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und können in eine von zwei Varianten durchgeführt und eingereicht werden. Variante I ist für den schnellen Einstieg. Variante II ist technisch anspruchsvoller dafür lernt man dabei zusätzlich wichtige Tools kennen.
 
 ### Variante I
 
