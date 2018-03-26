@@ -32,13 +32,13 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 
 * Auf [notebooks.azure.com](https://notebooks.azure.com/) anmelden
 * Teilen Sie die URL `https://notebooks.azure.com/USERNAME` dem Übungsleiter per Email mit (USERNAME ersetzen)
-* Im Menu `Libraries` wählen
-* Eine `New Library` `bim-108-01-solutions` erstellen (`Library Name` gleich wie `Library ID` und `Public library` Hacken setzen)
+* Im Menu, wählen Sie den Punkt `Libraries`
+* Wählen Sie `New Library` und benennen Sie Ihre neue Library `bim-108-01-solutions` (`Library Name` gleich wie `Library ID`, und setzen Sie den `Public library` Hacken)
 
 #### Übung NN Ausführen
 
 * NN steht für die Übungsnummer: 01, 02, ...
-* Wählen Sie `New` in Ihrer `bim-108-01-solutions` library 
+* Wählen Sie `New` in Ihrer `bim-108-01-solutions` Library 
 * Erstellen Sie den Ordner `lecture-NN` (Achtung: Item type = Folder)
 * Wählen Sie nun den neu erstellten Ordner
 * Für jede Datei DATEI in `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` führen Sie folgendes durch
@@ -53,8 +53,8 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 
 #### Bemerkungen
 
-* Es ist wichtig, dass Sie alle Dateien unter `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` kopieren
-* Sie können diese auch zuerst auf Ihren Rechner runterladen und dann auf Azure raufladen (wählen Sie dazu `New` -> `From computer`)
+* Es ist wichtig, dass Sie alle Dateien unter `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` kopieren (einige Übungen haben mehr als eine Datei, nicht nur die lecture-NN.ipynb Datei)
+* Sie können die Dateien auch zuerst auf Ihren Rechner runterladen und dann auf Azure raufladen (wählen Sie dazu `New` -> `From computer`)
 
 ### Variante II
 
