@@ -9,7 +9,7 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 |1.  | 5.3  | Einführung in XML |
 |2.  | 12.3 | XML: Fortgeschrittene Themen |
 |3.  | 19.3 | XPath |
-|4.  | 26.3 | Schema: Document Type Definition (DTD) |  
+|4.  | 26.3 | Schema: Document Type Definition (DTD) | 
 |5.  | 9.4  | Schema: XML Schema |
 |6.  | 16.4 | Einführung in RDF |
 |7.  | 23.4 | RDF Syntax: Eine breite Wahl |
@@ -24,19 +24,46 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 
 ## Übungen
 
-### Voraussetzungen
+Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und können in zwei Variante durchgeführt und eingereicht werden. Variante I ist für den schnellen Einstieg. Variante II ist technisch anspruchsvoller dafür lernt man dabei zusätzlich wichtige Tools kennen.
+
+### Variante I
+
+#### Voraussetzungen
+
+* Auf [notebooks.azure.com](https://notebooks.azure.com/) anmelden
+* Teilen Sie die URL `https://notebooks.azure.com/USERNAME` dem Übungsleiter per email mit (USERNAME ersetzen)
+* Im Menu `Libraries` wählen
+* Eine `New Library` `bim-108-01-solutions` erstellen (`Library Name` gleich wie `Library ID` und `Public library` Hacken setzen)
+
+#### Übung NN Ausführen
+
+* NN steht für die Übungsnummer: 01, 02, ...
+* Wählen Sie `New` in Ihrer `bim-108-01-solutions` library 
+* Erstellen Sie den Ordner `lecture-NN` (Achtung: Item type = Folder)
+* Wählen Sie nun den neu erstellten Ordner
+* Für jede Datei DATEI in `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` führen Sie folgendes durch
+  * Wählen Sie erneut den Menupunkt `New` und dann `From URL`
+  * Geben Sie die URL von DATEI ein, drücken Sie die TAB Taste damit `File Name` übernommen wird, und dann `Upload`
+* Wählen Sie nun die Datei `lecture-NN.ipynb`
+* Führen Sie die Übung durch. Viel Erfolg!
+* Übung in Jupyter speichern (File -> Save and Checkpoint)
+* Jupyter verlassen (File -> Close and Halt)
+
+#### Bemerkungen
+
+* Es ist wichtig, dass Sie alle Dateien unter `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` kopieren
+* Sie können diese auch zuerst auf Ihren Rechner runterladen und dann auf azure.com raufladen (wählen Sie dazu `New` -> `From computer`)
+
+### Variante II
+
+#### Voraussetzungen
 
 * Anaconda: [https://www.anaconda.com/download/](https://www.anaconda.com/download/)
 * Git Client: [https://git-scm.com/downloads](https://git-scm.com/downloads)
-
-### Anleitung
-
-#### Setup
-
 * [GitHub](https://github.com) Account eröffnen oder einloggen, falls vorhanden
 * Teilen Sie die URL `https://github.com/USERNAME` dem Übungsleiter per email mit (USERNAME ersetzen)
 * Neues Repository `bim-108-01-solutions` erstellen
-* "Git Bash Here" auf Desktop mittels rechter Maustaste
+* "Git Bash Here" (Windows) auf Desktop mittels rechter Maustaste (Terminal auf Mac)
 * In Git Bash, folgende Befehle ausführen (USERNAME ersetzen)
 
 ``` 
@@ -56,16 +83,16 @@ git pull
 cp notebooks/lecture-NN/* ../bim-108-01-solutions/lecture-NN/
 ```
 
-* Anaconda Navigator starten
-* Jupyter Notebook starten
+* Anaconda Navigator/Prompt starten
+* Jupyter Notebook starten (Befehl: jupyter notebook)
 * In Jupyter Notebook, nach `bim-108-01-solutions/lecture-NN` navigieren 
 * Das Notebook `lecture-NN.ipynb` öffnen
 * Viel Erfolg!
 
 #### Übung NN Einreichen
 
-* Übung in Jupyter Notebook speichern (File -> Save and Checkpoint)
-* Jupyter Notebook verlassen (File -> Close and Halt)
+* Übung in Jupyter speichern (File -> Save and Checkpoint)
+* Jupyter verlassen (File -> Close and Halt)
 * In Git Bash, folgende Befehle ausführen
 
 ```
