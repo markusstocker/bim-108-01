@@ -31,7 +31,7 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 #### Voraussetzungen
 
 * Auf [notebooks.azure.com](https://notebooks.azure.com/) anmelden
-* Teilen Sie die URL `https://notebooks.azure.com/USERNAME` dem Übungsleiter per email mit (USERNAME ersetzen)
+* Teilen Sie die URL `https://notebooks.azure.com/USERNAME` dem Übungsleiter per Email mit (USERNAME ersetzen)
 * Im Menu `Libraries` wählen
 * Eine `New Library` `bim-108-01-solutions` erstellen (`Library Name` gleich wie `Library ID` und `Public library` Hacken setzen)
 
@@ -63,7 +63,7 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 * Anaconda: [https://www.anaconda.com/download/](https://www.anaconda.com/download/)
 * Git Client: [https://git-scm.com/downloads](https://git-scm.com/downloads)
 * [GitHub](https://github.com) Account eröffnen oder einloggen, falls vorhanden
-* Teilen Sie die URL `https://github.com/USERNAME` dem Übungsleiter per email mit (USERNAME ersetzen)
+* Teilen Sie die URL `https://github.com/USERNAME` dem Übungsleiter per Email mit (USERNAME ersetzen)
 * Neues Repository `bim-108-01-solutions` erstellen
 * "Git Bash Here" (Windows) auf Desktop mittels rechter Maustaste (Terminal auf Mac)
 * In Git Bash, folgende Befehle ausführen (USERNAME ersetzen)
