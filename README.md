@@ -53,7 +53,7 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 
 #### Bemerkungen
 
-* Es ist wichtig, dass Sie alle Dateien unter `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` kopieren (einige Übungen haben mehr als eine Datei, nicht nur die lecture-NN.ipynb Datei)
+* Es ist wichtig, dass Sie alle Dateien unter `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` kopieren (einige Übungen haben mehr als eine Datei, nicht nur die `lecture-NN.ipynb` Datei)
 * Sie können die Dateien auch zuerst auf Ihren Rechner runterladen und dann auf Azure raufladen (wählen Sie dazu `New` -> `From computer`)
 
 ### Variante II
