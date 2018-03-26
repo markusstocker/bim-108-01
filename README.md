@@ -43,7 +43,9 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 * Wählen Sie nun den neu erstellten Ordner
 * Für jede Datei DATEI in `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` führen Sie folgendes durch
   * Wählen Sie erneut den Menupunkt `New` und dann `From URL`
-  * Geben Sie die URL von DATEI ein, drücken Sie die TAB Taste damit `File Name` übernommen wird, und dann `Upload`
+  * Geben Sie die URL von DATEI ein
+  * Drücken Sie die TAB Taste damit `File Name` übernommen wird
+  * Wählen Sie dann `Upload`
 * Wählen Sie nun die Datei `lecture-NN.ipynb`
 * Führen Sie die Übung durch. Viel Erfolg!
 * Übung in Jupyter speichern (File -> Save and Checkpoint)
@@ -52,7 +54,7 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 #### Bemerkungen
 
 * Es ist wichtig, dass Sie alle Dateien unter `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` kopieren
-* Sie können diese auch zuerst auf Ihren Rechner runterladen und dann auf azure.com raufladen (wählen Sie dazu `New` -> `From computer`)
+* Sie können diese auch zuerst auf Ihren Rechner runterladen und dann auf Azure raufladen (wählen Sie dazu `New` -> `From computer`)
 
 ### Variante II
 
