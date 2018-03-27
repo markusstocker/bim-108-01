@@ -38,14 +38,14 @@ Die Übungen werden als [Jupyter](http://jupyter.org) Notebooks ausgeliefert und
 #### Übung NN Ausführen
 
 * NN steht für die Übungsnummer: 01, 02, ...
-* Wählen Sie `New` in Ihrer `bim-108-01-solutions` Library 
+* Laden Sie sich das `bim-108-01` Repository [als ZIP Datei auf Ihren Rechner](https://github.com/markusstocker/bim-108-01/archive/master.zip)
+* Entpacken Sie die runtergeladene `bim-108-01-master.zip` ZIP Datei
+* In Ihrer `bim-108-01-solutions` Library auf Azure, drücken Sie `New`
 * Erstellen Sie den Ordner `lecture-NN` (Achtung: Item type = Folder)
 * Wählen Sie nun den neu erstellten Ordner
-* Für jede Datei DATEI in `https://github.com/markusstocker/bim-108-01/tree/master/notebooks/lecture-NN/` führen Sie folgendes durch
-  * Wählen Sie erneut den Menupunkt `New` und dann `From URL`
-  * Geben Sie die URL von DATEI ein
-  * Drücken Sie die TAB Taste damit `File Name` übernommen wird
-  * Wählen Sie dann `Upload`
+* Drücken Sie `New` erneut und dann `From computer` und `Choose files`
+* Selektieren Sie nun alle Dateien im Verzeichnis `notebooks/lecture-NN` der entpackten ZIP Datei 
+* Drücken Sie dann `Upload` um die Dateien der Übung NN auf Azure hochzuladen
 * Wählen Sie nun die Datei `lecture-NN.ipynb`
 * Führen Sie die Übung durch. Viel Erfolg!
 * Übung in Jupyter speichern (File -> Save and Checkpoint)
