@@ -21,7 +21,7 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 |13. | 11.6.  | Ontologien mit RDF Schema |
 |14. | 18.6. | Tools für RDF |
 |15. | 25.6. | XML und RDF: Rückschau und Ausblick |
-|16. | 10.7. | Klausur |
+|16. | 10.7. 10-12 Uhr | Klausur, zusammengelegt mit BIM-108-02 |
 
 ## Übungen
 
