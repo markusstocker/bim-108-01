@@ -6,21 +6,22 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 
 | #  | Tag  | Thema      |
 | --:| ----:| ---------- |
-|1.  | 5.3  | Einführung in XML |
-|2.  | 12.3 | XML: Fortgeschrittene Themen |
-|3.  | 19.3 | XPath |
-|4.  | 26.3 | Schema: Document Type Definition (DTD) | 
-|5.  | 9.4  | Schema: XML Schema |
-|6.  | 16.4 | Einführung in RDF |
-|7.  | 23.4 | RDF Syntax: Eine breite Wahl |
-|8.  | 30.4 | RDF: Fortgeschrittene Themen |
-|9.  | 7.5  | SPARQL: Die RDF Abfragesprache |
-|10. | 14.5 | SPARQL: Fortgeschrittene Themen |
-|11. | 28.5 | Einführung in RDF Schema |
-|12. | 4.6  | Ontologien mit RDF Schema |
-|13. | 11.6 | Tools für RDF |
-|14. | 18.6 | XML und RDF: Rückschau und Ausblick |
-|15. | (?) 25.6 | Klausur |
+|1.  | 5.3.  | Einführung in XML |
+|2.  | 12.3. | XML: Fortgeschrittene Themen |
+|3.  | 19.3. | XPath |
+|4.  | 26.3. | Fällt aus |
+|5.  | 9.4. | Schema: Document Type Definition (DTD) | 
+|6.  | 16.4. | Schema: XML Schema |
+|7.  | 23.4. | Einführung in RDF |
+|8.  | 30.4. | RDF Syntax: Eine breite Wahl |
+|9.  | 7.5. | RDF: Fortgeschrittene Themen |
+|10.  | 14.5.  | SPARQL: Die RDF Abfragesprache |
+|11. | 28.5. | SPARQL: Fortgeschrittene Themen |
+|12. | 4.6. | Einführung in RDF Schema |
+|13. | 11.6.  | Ontologien mit RDF Schema |
+|14. | 18.6. | Tools für RDF |
+|15. | 25.6. | XML und RDF: Rückschau und Ausblick |
+|16. | 10.7. | Klausur |
 
 ## Übungen
 
