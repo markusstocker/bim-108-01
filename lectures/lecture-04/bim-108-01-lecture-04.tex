@@ -1,0 +1,392 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{darkblue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\makeatletter
+\newcommand\SoulColor{%
+	\let\set@color\beamerorig@set@color
+	\let\reset@color\beamerorig@reset@color}
+\makeatother
+
+\lstset{language=XML}
+
+\title{Schema: Document Type Definition (DTD)}
+\author{Markus Stocker}
+\date{9. April 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Rekapitulation}
+	
+	\begin{itemize}
+		\item XPath, erklären Sie
+		\begin{itemize}
+			\item Schritt und Lokalisierungspfad: Was bedeutet \texttt{A::KT[P]*}
+			\item Welche Lokalisierungspfadarten gibt es?
+			\item Was sind Prädikate?
+			\item Was erlauben Funktionen?
+		\end{itemize}
+		\item Hatten wir bereits: Was bedeutet Wohlgeformtheit?
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Übersicht}
+	
+	\begin{itemize}
+		\item Wozu ein Schema?
+		\item Gültig: Nicht nur Wohlgeformt
+		\item Die Document Type Definition (DTD)
+		\item DTD Konstrukte und Beispiele
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Schema: Warum brauchen wir sowas?}
+	
+	\begin{itemize}
+		\item Die NASA, ESA, und JAXA haben Daten über das Sonnensystem
+		\item Man möchte nun die jeweiligen Daten austauschen und integrieren
+		\item Die jeweiligen Systeme stellen Daten als XML zur verfügung
+		\item Allerdings verwenden diese unterschiedliche \emph{tags}
+		\item Zum Beispiel \texttt{<planet/>}, \texttt{<Planet/>}, \texttt{<\begin{CJK}{UTF8}{min}惑星\end{CJK}/>}
+		\item Zudem sind die XML Dokumente unterschiedlich strukturiert
+		\item Solche Unterschiede erschweren den Datenaustausch
+		\item Die Varianten in Software zu berücksichtigen ist mühsam
+		\item Nicht nur mühsam, letztlich unmöglich da beliebig viele
+		\item Was tun? 
+		\item Die drei Institutionen könnten sich auf ein Schema einigen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Schema: Warum brauchen wir sowas?}
+	
+	\begin{itemize}
+		\item Hier in diesem Raum legen wir uns auf die deutsche Sprache fest
+		\item Würde ich die Vorlesung auf italienisch halten wäre das eher hinderlich
+		\item Bei XML, der verwendeten Terme und deren Bedeutung ist es ähnlich
+		\item Mit einem Schema legen sich Parteien auf einen \emph{Standart} fest
+		\item Dies soll die Interoperabilität der jeweiligen Systeme ermöglichen
+		\item Fähigkeit eines Systems mit anderen Systemen zusammenzuarbeiten
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Wohlgeformtheit und Gültigkeit}
+	
+	\begin{itemize}
+		\item Ein XML Dokument mit korrekter Syntax ist wohlgeformt
+		\item Validiert ein wohlgeformtes Dokument einem Schema ist es gültig
+		\item Ein gültiges Dokument ist immer auch wohlgeformt (\emph{well-formed})
+		\item Ein wohlgeformtes Dokument ist nicht zwingend gültig (\emph{valid})
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Document Type Definition (DTD)}
+	
+	\begin{itemize}
+		\item Eine Grammatik zur Spezifikation von XML Dokumente
+		\item Beschreibung gültiger Elemente und Attribute
+		\item Eine DTD definiert somit auch die XML Struktur
+		\item Parteien können sich auf eine gemeinsame DTD einigen
+		\item Systeme werden dann entsprechend der DTD entwickelt
+		\item Systeme können XML Dokumente der DTD entgegen validieren
+		\item Erhaltene aber auch gelieferte XML Dokumente
+		\item Validiert ein XML Dokument ist dieses ...
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Beispiel: XML Dokument und Entsprechende DTD}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <planets>
+    <planet>
+      <name>Earth</name>
+    </planet>
+  </planets>		
+	\end{lstlisting}
+	
+	\vspace{1cm}
+	  	
+	\begin{lstlisting}	
+  <!ELEMENT planets (planet)>
+  <!ELEMENT planet (name)>
+  <!ELEMENT name (#PCDATA)>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Einbindung einer DTD: Im Dokument}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <?xml version="1.0"?>
+  <!DOCTYPE planets [
+  <!ELEMENT planets (planet)>
+  <!ELEMENT planet (name)>
+  <!ELEMENT name (#PCDATA)>
+  ]>
+  <planets>
+    <planet>
+      <name>Earth</name>
+    </planet>
+  </planets>		
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Einbindung einer DTD: Extern}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <?xml version="1.0"?>
+  <!DOCTYPE planets SYSTEM "planets.dtd">
+  <planets>
+    <planet>
+      <name>Earth</name>
+    </planet>
+  </planets>		
+	\end{lstlisting}
+	
+  \vspace{1cm}
+
+  Inhalt der \texttt{planets.dtd} Datei
+	
+	\begin{lstlisting}
+  <!ELEMENT planets (planet)>
+  <!ELEMENT planet (name)>
+  <!ELEMENT name (#PCDATA)>
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{Konstrukte}
+	
+	\begin{itemize}
+		\item XML besteht aus den folgenden Konstrukte
+		\begin{itemize}
+			\item Elemente
+			\item Attribute
+			\item Entitäten
+			\item PCDATA (\emph{parsed character data})
+			\item CDATA (\emph{[unparsed] character data})
+		\end{itemize}
+		\item XML Dokumente verwenden diese Konstrukte
+		\item Wie wir gesehen haben, allerdings sehr unterschiedlich
+		\item DTD ermöglicht Deklaration spezifischer Verwendungen
+		\item Deklaration gültiger Verwendung der Konstrukte
+		\item Es ist eine Grammatik zur Spezifikation von XML Dokumente
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Elemente Deklarieren}
+	
+	\begin{itemize}
+		\item Elemente werden mit \texttt{ELEMENT} deklariert
+		\item Die folgenden beiden Syntaxen sind erlaubt
+	\end{itemize}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}
+  <!ELEMENT name inhalt>
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Der \texttt{name} des elements
+		\item Und \texttt{inhalt} einer von
+		\begin{itemize}
+			\item \texttt{EMPTY} für das Element ohne Inhalt
+			\item \texttt{ANY} für beliebige Inhalte
+			\item Gemischte Inhalte, \texttt{PCDATA} und Kindelemente
+			\item Kindelemente
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <!ELEMENT planets EMPTY>
+  <!ELEMENT planet (name, radius)>
+  <!ELEMENT name (#PCDATA)>
+	\end{lstlisting}
+		
+\end{frame}
+
+\begin{frame}[fragile]{Element Inhaltsmodelle}
+	
+	\begin{itemize}
+		\item Sequenz \texttt{(A, B)}: \texttt{A} und \texttt{B} müssen in dieser Sequenz auftreten
+		\item Alternative \texttt{(A | B)}: Entweder \texttt{A} oder \texttt{B} müssen auftreten
+		\item Wiederholungen
+		\begin{itemize}
+			\item \texttt{*}: Null oder mehrmals
+			\item \texttt{+}: Ein oder mehrmals
+			\item \texttt{?}: Null oder einmal
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <!ELEMENT planets (planet+)>
+  <!ELEMENT planet (name, radius?)>
+  <!ELEMENT planet (#PCDATA | name)*>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Attribute Deklarieren}
+	
+	\begin{itemize}
+		\item Attribute werden mit \texttt{ATTLIST} deklariert
+		\item Entsprechend der folgenden Syntax
+	\end{itemize}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}
+  <!ATTLIST element attribut typ wert>
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Der \texttt{element} Name
+		\item Der \texttt{attribut} Name
+		\item Der \texttt{typ} des Attributs
+		\item Der \texttt{wert} des Attributs
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <!ATTLIST name radius CDATA "0">
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Attribut Typen (ausgewählte)}
+	
+	\centering
+	\begin{tabular}{l|l}
+	Typ & Beschreibung \\
+	\hline
+	\texttt{CDATA} & Wert ist Zeichenfolge \\
+	\texttt{(w1|w2|...)} & Wert aus enumerierter Liste \\
+	\texttt{ID} & Wert ist eindeutige ID \\
+	\texttt{IDREF} & Wert ist ID eines anderen Elements \\
+	\texttt{NMTOKEN} & Wert ist ein gültiger XML Name \\
+	\texttt{ENTITY} & Wert ist eine Entität \\
+	\hline
+	\end{tabular}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Attribut Werte}
+	
+	\centering
+	\begin{tabular}{l|l}
+		Wert & Beschreibung \\
+		\hline
+		\texttt{value} & Der Standartwert des Attributs \\
+		\texttt{\#REQUIRED} & Das Attribut ist zwingend \\
+		\texttt{\#IMPLIED} & Das Attribut ist optional \\
+		\texttt{\#FIXED value} & Das Attribut ist optional, Wert ist festgelegt \\
+		\hline
+	\end{tabular}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Entitäten Deklarieren}
+	
+	\begin{itemize}
+		\item Entitäten werden mit \texttt{ENTITY} deklariert
+		\item Entsprechend der folgenden Syntax
+	\end{itemize}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}
+  <!ENTITY name "wert">
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Der \texttt{name} der Entität
+		\item Der \texttt{wert} der Entität
+	\end{itemize}
+	
+	\begin{lstlisting}
+  <!DOCTYPE planet [
+    <!ENTITY earth "Planet Earth">
+  ]>
+  <planet>
+    <name>&earth;</name>
+  </planet>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Namensräume}
+	
+	\begin{itemize}
+		\item DTD unterstüzt Namensräume nicht
+		\item Man kann diese allerdings als Attribute deklarieren
+	\end{itemize}
+	
+	\lstset{language=XML}
+	
+	\begin{lstlisting}
+  <!ELEMENT nasa:planet EMPTY>
+  <!ATTLIST nasa:planet xmlns:nasa 
+             CDATA #FIXED "http://nasa.org">
+	
+  <nasa:planet xmlns:nasa="http://nasa.org"/>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Zusammenfassung}
+	
+	\begin{itemize}
+		\item Schemas ermöglichen und erhöhen Interoperabilität
+		\item Fähigkeit verschiedener Systeme zusammenzuarbeiten
+		\item Nötig ist eine Sprache zur Spezifikation von XML Dokumente
+		\item DTD ist eine solche Sprache
+		\item Mit DTD kann man XML Dokumente validieren
+		\item Validiert ein XML Dokument ist dieses gültig
+		\item Ein gültiges XML Dokument ist immer auch wohlgeformt
+	\end{itemize}
+	
+\end{frame}
+
+\end{document}
