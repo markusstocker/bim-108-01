@@ -51,6 +51,15 @@
 
 \maketitle
 
+\begin{frame}{Klausur}
+	
+	\begin{itemize}
+		\item 10. Juli 2018, 10-12 Uhr, schriftlich
+		\item Zusammengelegt mit BIM-108-02 (Inhaltserschliessung I - Methoden)
+	\end{itemize}
+	
+\end{frame}
+
 \begin{frame}{Rekapitulation}
 	
 	\begin{itemize}
@@ -82,13 +91,34 @@
 	\begin{itemize}
 		\item Die NASA, ESA, und JAXA haben Daten über das Sonnensystem
 		\item Man möchte nun die jeweiligen Daten austauschen und integrieren
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Schema: Warum brauchen wir sowas?}
+	
+	\begin{itemize}
 		\item Die jeweiligen Systeme stellen Daten als XML zur verfügung
 		\item Allerdings verwenden diese unterschiedliche \emph{tags}
 		\item Zum Beispiel \texttt{<planet/>}, \texttt{<Planet/>}, \texttt{<\begin{CJK}{UTF8}{min}惑星\end{CJK}/>}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Schema: Warum brauchen wir sowas?}
+	
+	\begin{itemize}
 		\item Zudem sind die XML Dokumente unterschiedlich strukturiert
 		\item Solche Unterschiede erschweren den Datenaustausch
 		\item Die Varianten in Software zu berücksichtigen ist mühsam
 		\item Nicht nur mühsam, letztlich unmöglich da beliebig viele
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Schema: Warum brauchen wir sowas?}
+	
+	\begin{itemize}
 		\item Was tun? 
 		\item Die drei Institutionen könnten sich auf ein Schema einigen
 	\end{itemize}
@@ -199,10 +229,10 @@
 
 \end{frame}
 
-\begin{frame}{Konstrukte}
+\begin{frame}{Konstrukte: Deklaration deren Verwendung}
 	
 	\begin{itemize}
-		\item XML besteht aus den folgenden Konstrukte
+		\item XML Dokumente verwenden folgende Konstrukte
 		\begin{itemize}
 			\item Elemente
 			\item Attribute
@@ -210,11 +240,9 @@
 			\item PCDATA (\emph{parsed character data})
 			\item CDATA (\emph{[unparsed] character data})
 		\end{itemize}
-		\item XML Dokumente verwenden diese Konstrukte
 		\item Wie wir gesehen haben, allerdings sehr unterschiedlich
 		\item DTD ermöglicht Deklaration spezifischer Verwendungen
-		\item Deklaration gültiger Verwendung der Konstrukte
-		\item Es ist eine Grammatik zur Spezifikation von XML Dokumente
+		\item Also, Deklaration gültiger Verwendung der Konstrukte
 	\end{itemize}
 	
 \end{frame}
@@ -223,7 +251,7 @@
 	
 	\begin{itemize}
 		\item Elemente werden mit \texttt{ELEMENT} deklariert
-		\item Die folgenden beiden Syntaxen sind erlaubt
+		\item Entsprechend der folgenden Syntax
 	\end{itemize}
 	
 	\lstset{language=XML}
