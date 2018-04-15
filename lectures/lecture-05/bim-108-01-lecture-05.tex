@@ -1,0 +1,540 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{darkblue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\makeatletter
+\newcommand\SoulColor{%
+	\let\set@color\beamerorig@set@color
+	\let\reset@color\beamerorig@reset@color}
+\makeatother
+
+\lstset{language=XML}
+
+\title{Schema: XML Schema}
+\author{Markus Stocker}
+\date{16. April 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[fragile]{Rekapitulation}
+	
+	\begin{itemize}
+		\item Wozu brachen wir Schemata?
+		\item Was ist die Document Type Definition (DTD)?
+		\item Was ist der Unterschied zwischen Wohlgeformtheit und Gültigkeit?
+		\item Unterstützt DTD Namensräume?
+		\item Gültig oder nicht? Wenn nicht, warum?
+	\end{itemize}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <!ELEMENT planets (planet)>
+  <!ELEMENT planet EMPTY>
+	
+  <planets>
+    <planet/>
+    <planet/>
+  </planets>		
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Übersicht}
+	
+	\begin{itemize}
+		\item Warum DTD nicht genügt
+		\item XML Schema
+		\item Sprachkonstrukte
+		\item Beispiele
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Wir haben die DTD ...}
+	
+	\begin{itemize}
+		\item Warum brauchen wir eine weitere Sprache für Schema Definition?
+		\item DTD hat ein paar Nachteile, und zwar
+		\begin{itemize}
+			\item Keine Datentypen
+			\item Keine Unterstützung für Namensräume
+			\item Nicht XML Syntax
+		\end{itemize}
+		\item XML Schema behebt diese Nachteile
+		\item Der Zweck ist gleich: XML Dokumente auf Gültigkeit prüfen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML Schema}
+	
+	\begin{itemize}
+		\item Eine XML basierte Alternative zu DTD
+		\item XML Schema ist also in XML geschrieben
+		\item Nicht nötig eine weitere Sprache zu lernen
+		\item Gleichen Tools, wie Editor, Parser, etc.
+		\item Unterstützt Datentypen und stellt vordefinierte zur Verfügung
+		\item Ermöglich detailliertere Beschreibung der Daten
+		\item Strengere Restriktionen die auf Gültigkeit geprüft werden können
+		\item Einfachere Konvertierung zwischen Datentypen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML Schema}
+	
+	\begin{itemize}
+		\item XML Schema ist erweiterbar, weil in XML geschrieben
+		\item Ein Schema kann andere Schema verwenden und erweitern
+		\item Eigene Datentypen definieren (Benutzerdefiniert)
+		\item Diese werden aus den definierten Datentypen abgeleitet
+		\item Ein XML Dokument kann auf mehrere XML Schema referenzieren
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML Schema}
+	
+	\begin{itemize}
+		\item Unterstützung von Datentypen ist wichtig
+		\item In DTD sind die Zeichenketten \texttt{2018-02-10} und \texttt{0.5} \texttt{PCDATA}
+		\item Genauer genommen, handelt es sich aber um ein Datum und eine Zahl
+		\item Es ist von Vorteil wenn man dies beschreiben kann
+		\item Ausserdem, ist das Datum \texttt{2018-02-10} nicht eindeutig
+		\item Es könnte der 2. Oktober oder der 10. Februar 2018 sein
+		\item Der Datentyp \texttt{xs:date} spezifiziert das Format als \texttt{YYYY-MM-DD}
+		\item Somit ist klar, dass \texttt{2018-02-10} der 10. Februar 2018 ist
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Beispiel}
+	
+	XML Schema
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="name" type="xs:string"/>
+  </xs:schema>	
+	\end{lstlisting}	
+
+	\vspace{0.5cm}
+	
+	DTD (zum Vergleich)
+	\begin{lstlisting}
+  <!ELEMENT name (#PCDATA)>	
+	\end{lstlisting}
+  
+	\vspace{0.5cm}
+  
+    XML (als Beispiel)
+   	\begin{lstlisting}	
+  <name>Earth</name>
+    \end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Elemente Deklarieren}
+	
+	\begin{itemize}
+		\item Unterscheidung zwischen einfachen und komplexen Elemente
+		\item Einfache Elemente sind XML Elemente die Text beinhalten
+		\item XML Elemente ohne Kindelemente oder Attribute
+		\item Wobei ``Text'' viel sein kann: Zahlen, Datum, Zeichenfolge, ... 
+		\item XML Elemente mit Kinder/Attribute sind komplexe Elemente
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Einfache Elemente Deklarieren}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="..." type="..."/>
+    \end{lstlisting}
+	
+	\begin{itemize}
+		\item Der \texttt{name} entspricht dem Elementnamen
+		\item Der \texttt{type} entspricht dem Elementtyp
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Vordefinierte Datentypen (Auswahl)}
+	
+	\begin{itemize}
+		\item \texttt{xs:string}
+		\item \texttt{xs:boolean}
+		\item \texttt{xs:int}
+		\item \texttt{xs:date}
+		\item \texttt{xs:time}
+		\item \texttt{xs:dateTime}
+		\item \texttt{xs:duration}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Einfache Elemente: Beispiel}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="radius" type="xs:decimal"/>
+  
+  <name>Earth</name>
+  <radius>6371.0</radius>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Einfache Elemente: \emph{Default} und \emph{Fixed} Werte}
+	
+	\begin{itemize}
+		\item Einfache Elemente können vorgegebene oder festgelegte Werte haben
+		\item Der vorgegebene Wert wird dem Element automatisch zugewiesen
+		\item Angenommen es wird kein anderer Wert angegeben
+		\item Der festgelegte Wert wird ebenfalls automatisch zugewiesen
+		\item Es ist nicht möglich ein anderer Wert anzugeben
+	\end{itemize}
+		
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="name" type="xs:string" fixed="Earth"/>
+  <xs:element name="radius" type="xs:decimal" default="0"/>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Einfache Elemente: \emph{minOccurs} und \emph{maxOccurs}}
+	
+	\begin{itemize}
+		\item Spezifikation der Häufigkeit eines Elements
+		\item \emph{minOccurs}: Wie oft ein Element mindestens vorkommen muss
+		\item \emph{maxOccurs}: Wie oft ein Element höchstens vorkommen kann
+		\item Vorgegebener Wert ist 1
+		\item \emph{minOccurs} darf nicht grösser sein als \emph{maxOccurs}
+		\item Unlimitierte Häufigkeit mit \texttt{maxOccurs="unbounded"}
+	\end{itemize}
+	
+	\lstset{language=XML}
+	\footnotesize
+	\begin{lstlisting}	
+  <xs:element name="name" type="xs:string" maxOccurs="3"/>
+  <xs:element name="radius" type="xs:decimal" minOccurs="0"/>
+  <xs:element name="name" type="xs:string" minOccurs="2" maxOccurs="10"/>
+  <xs:element name="name" type="xs:string" maxOccurs="unbounded"/>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Attribute Deklarieren}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:attribute name="..." type="..."/>
+	\end{lstlisting}
+	
+	\begin{itemize}
+		\item Der \texttt{name} entspricht dem Attributnamen
+		\item Der \texttt{type} entspricht dem Attributtyp
+		\item Ähnlich wie die Deklaration einfacher Elemente
+		\item Einfache Elemente können keine Attribute haben
+		\item Attribute selbst werden allerdings als einfache Elemente deklariert
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Attribute: Beispiel}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:attribute name="radius" type="xs:decimal"/>
+	
+  <name radius="6371.0">Earth</name>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Attribute: Weitere Eigenschaften}
+	
+	\begin{itemize}
+	\item Attribute können vorgegebene oder festgelegte Werte haben
+	\item Attribute sind optional: Mit \texttt{use="required"} sind sie erforderlich
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Komplexe Elemente Deklarieren}
+	
+	\begin{itemize}
+		\item Deklaration von XML Elemente mit Kindelemente und/oder Attribute
+		\item Es gibt vier Arten von komplexen Elemente
+		\begin{itemize}
+			\item Leere Elemente
+			\item Elemente die nur andere Elemente enthalten
+			\item Elemente die nur Text enthalten
+			\item Elemente die Text und andere Elemente enthalten
+		\end{itemize}
+		\item Können Attribute enthalten
+		\item Folgendes Beispiel ist ein komplexes Element
+		\item Der Inhalt ist zwar nur Text (einfaches Element)
+		\item Allerdings enthält das Element ein Attribut
+	\end{itemize}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <name radius="6371.0">Earth</name>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Komplexe Elemente Deklarieren: Variante I}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="planet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="radius" type="xs:decimal"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Komplexe Elemente Deklarieren: Variante II}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="planet" type="PlanetType"/>
+	
+  <xs:complexType name="PlanetType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="radius" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Komplexe Elemente Deklarieren: Vergleich}
+	
+	\begin{itemize}
+		\item Variante I entspricht dem XML Dokument und ist einfach
+		\item In Variante I kann nur \texttt{planet} die Spezifikation verwenden
+		\item In Variante II können mehrere Elemente die Spezifikation verwenden
+		\item Andere Elemente mögen ein Name und Radius haben
+		\item Spezifiziere den Typ einmal und verwende ihn mehrmals
+		\item Weiterer Vorteil der Variante II ist die mögliche Erweiterung
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Komplexe Elemente Erweitern}
+	
+	\small
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="ellipsoid" type="EllipsoidType"/>
+  <xs:element name="planet" type="PlanetType"/>
+	
+  <xs:complexType name="EllipsoidType">
+    <xs:sequence>
+      <xs:element name="radius" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="PlanetType">
+    <xs:complexContent>
+      <xs:extension base="EllipsoidType">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+ </xs:complexType>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Komplexe Leere Elemente}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <planet name="Earth"/>
+
+  <xs:element name="planet">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Komplexe Elemente die nur Text Beinhalten}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <planet radius="6371.0">Earth</planet>
+	
+  <xs:element name="planet">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="radius" type="xs:decimal" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Komplexe Elemente Ordnen}
+	
+	\begin{itemize}
+		\item Es ist möglich, die Ordnung der Kindelement zu spezifizieren
+		\item \texttt{xs:all}: Beliebige Ordnung und jedes Element nur einmal
+		\item \texttt{xs:choice}: Ein Element aus der spezifizierten Menge
+		\item \texttt{xs:sequence}: Elemente müssen in spezifizierter Ordnung vorkommen
+	\end{itemize}
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{Einschränkungen (\emph{Restrictions})}
+	
+	\begin{itemize}
+		\item XML Element und Attribut Werte können eingeschränkt werden
+		\item Möglich sind Restriktionen auf
+		\begin{itemize}
+			\item Wertebereich, z.B. \texttt{1000 < radius < 10000}
+			\item Wertemenge, z.B. \texttt{Farben = \{Blau, Rot, Grün\}}
+			\item Wertemuster, z.B. \texttt{[a-zA-Z]}
+			\item Leerzeichen, z.B. \texttt{collapse}
+			\item Länge, z.B. Passwort mit Länge 10 Zeichen
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Einschränkungen: Wertebereich}
+
+	\lstset{language=XML}
+	\begin{lstlisting}		
+  <xs:element name="radius">
+    <xs:simpleType>
+      <xs:restriction base="xs:integer">
+        <xs:minInclusive value="1000"/>
+        <xs:maxInclusive value="10000"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Einschränkungen: Wertemenge}
+
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="planet">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="Venus"/>
+        <xs:enumeration value="Earth"/>
+        <xs:enumeration value="Mars"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+	\end{lstlisting}
+		
+\end{frame}
+
+\begin{frame}[fragile]{Einschränkungen: Wertemuster}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:element name="name">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[A-Z][a-z]+"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Namesräume}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}	
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://example.org">
+
+    <xs:element name="planet">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="radius" type="xs:decimal"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+  
+  </xs:schema>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Zusammenfassung}
+	
+	\begin{itemize}
+		\item XML Schema behebt einige Nachteile der DTD, isb. Datentypen
+		\item Gleicher Zweck, XML Dokumente auf Gültigkeit prüfen
+		\item Grundidee ist benötigte Elemente und Attribute zu deklarieren
+		\item XML Schema und DTD ermöglichen und erhöhen Interoperabilität
+	\end{itemize}
+	
+\end{frame}
+
+\end{document}
