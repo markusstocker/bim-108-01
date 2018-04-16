@@ -107,7 +107,7 @@
 		\item Eine XML basierte Alternative zu DTD
 		\item XML Schema ist also in XML geschrieben
 		\item Nicht nötig eine weitere Sprache zu lernen
-		\item Gleichen Tools, wie Editor, Parser, etc.
+		\item Gleiche Tools, wie Editor, Parser, etc.
 		\item Unterstützt Datentypen und stellt vordefinierte zur Verfügung
 		\item Ermöglich detailliertere Beschreibung der Daten
 		\item Strengere Restriktionen die auf Gültigkeit geprüft werden können
@@ -132,10 +132,10 @@
 	
 	\begin{itemize}
 		\item Unterstützung von Datentypen ist wichtig
-		\item In DTD sind die Zeichenketten \texttt{2018-02-10} und \texttt{0.5} \texttt{PCDATA}
-		\item Genauer genommen, handelt es sich aber um ein Datum und eine Zahl
+		\item In DTD sind die Zeichenketten \texttt{2018-02-10} und \texttt{0.5} beide \texttt{PCDATA}
+		\item Genauer genommen handelt es sich aber um ein Datum und eine Zahl
 		\item Es ist von Vorteil wenn man dies beschreiben kann
-		\item Ausserdem, ist das Datum \texttt{2018-02-10} nicht eindeutig
+		\item Ausserdem ist das Datum \texttt{2018-02-10} nicht eindeutig
 		\item Es könnte der 2. Oktober oder der 10. Februar 2018 sein
 		\item Der Datentyp \texttt{xs:date} spezifiziert das Format als \texttt{YYYY-MM-DD}
 		\item Somit ist klar, dass \texttt{2018-02-10} der 10. Februar 2018 ist
@@ -272,9 +272,6 @@
 	\begin{itemize}
 		\item Der \texttt{name} entspricht dem Attributnamen
 		\item Der \texttt{type} entspricht dem Attributtyp
-		\item Ähnlich wie die Deklaration einfacher Elemente
-		\item Einfache Elemente können keine Attribute haben
-		\item Attribute selbst werden allerdings als einfache Elemente deklariert
 	\end{itemize}
 	
 \end{frame}
@@ -294,7 +291,8 @@
 	
 	\begin{itemize}
 	\item Attribute können vorgegebene oder festgelegte Werte haben
-	\item Attribute sind optional: Mit \texttt{use="required"} sind sie erforderlich
+	\item Attribute sind grundsätzlich optional 
+	\item Mit \texttt{use="required"} sind sie erforderlich
 	\end{itemize}
 	
 \end{frame}
@@ -373,7 +371,6 @@
 	\small
 	\lstset{language=XML}
 	\begin{lstlisting}	
-  <xs:element name="ellipsoid" type="EllipsoidType"/>
   <xs:element name="planet" type="PlanetType"/>
 	
   <xs:complexType name="EllipsoidType">
@@ -529,9 +526,9 @@
 \begin{frame}{Zusammenfassung}
 	
 	\begin{itemize}
-		\item XML Schema behebt einige Nachteile der DTD, isb. Datentypen
+		\item XML Schema behebt einige Nachteile der DTD, insb. Datentypen
 		\item Gleicher Zweck, XML Dokumente auf Gültigkeit prüfen
-		\item Grundidee ist benötigte Elemente und Attribute zu deklarieren
+		\item Grundidee ist, benötigte Elemente und Attribute zu deklarieren
 		\item XML Schema und DTD ermöglichen und erhöhen Interoperabilität
 	\end{itemize}
 	
