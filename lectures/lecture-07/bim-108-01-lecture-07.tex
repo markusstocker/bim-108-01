@@ -120,9 +120,9 @@
 	
 	\begin{itemize}
 		\item Für maschinelle Verarbeitung benötigen wir eine Serialisierung
-		\item Transformation der Graph Datenstruktur in eine Zeichenfolge
-		\item Letztlich ein Text Dokument
-		\item Ähnlich wie Serialisierung der XML Baumstruktur als Text Dokument
+		\item Transformation eines Graphen in eine Zeichenfolge
+		\item Letztlich ein Text Dokument (Datenbank für grössere Datenmengen)
+		\item Ähnlich wie Serialisierung von XML Bäume als Text Dokumente
 	\end{itemize}
 	
 \end{frame}
@@ -133,7 +133,7 @@
 		\item Graph kann man anhand der Kanten zerlegen
 		\item Jede Kante mit verknüpften Knoten ist eindeutig
 		\item Zwei über eine Kante verknüpfte Knoten ist Elementareinheit
-		\item In RDF wir diese Einheit Tripel (\emph{triple}) genannt
+		\item In RDF wird diese Einheit Tripel (\emph{triple}) genannt
 		\item Ein RDF Graph ist somit eine Tripelmenge
 		\item Und zwar ungeordnete Menge
 	\end{itemize}
@@ -147,7 +147,7 @@
 	\end{itemize}
 	
 	\begin{lstlisting}
-	Triple := <Subject> <Predicate> <Object>
+	Triple := (Subject, Predicate, Object)
 	\end{lstlisting}
 		
 	\begin{itemize}
@@ -158,10 +158,10 @@
 	
 	\centering
 	\begin{tikzpicture}[node distance=5cm]
-		\node[node style] (s) {Subjekt};
+		\node[node style] (s) {Subject};
 		
-		\node[node style, right of=s] (o) {Objekt}
-		edge [<-] node[edge style=sloped,above]{Prädikat} (s);
+		\node[node style, right of=s] (o) {Object}
+		edge [<-] node[edge style=sloped,above]{Predicate} (s);
 	\end{tikzpicture}
 	
 	\begin{itemize}
@@ -203,7 +203,7 @@
 \begin{frame}{N-Triples}
 	
 	\begin{itemize}
-		\item Zeilenorientierte Serialisierung von Tripel
+		\item Zeilenorientierte Serialisierung einer Tripelmenge
 		\item Einfach für Software zu lesen und schreiben
 		\item Ideal für \emph{streaming} Anwendungen
 		\item Ein Tripel endet mit einem Punkt
@@ -289,7 +289,6 @@ _:b <http://example.org#unit> <http://units.org#km> .
 	\begin{itemize}
 		\item XML basierte RDF Serialisierung
 		\item Weit verbreitet, XML Parser in vielen Programmiersprachen
-		\item Kodierung der Tripel muss hierarchisch sein
 		\item Triple Gruppierung anhand Subjekte
 		\item Wurzelknoten ist \texttt{rdf:RDF} mit globalen Namensräumen
 	\end{itemize}
@@ -496,7 +495,7 @@ _:b <http://example.org#unit> <http://units.org#km> .
 	
 	\begin{itemize}
 		\item Von Graphvisualisierungen zu Tripelmengen
-		\item Das Tripel bestendend aus Subject, Prädikat, Object
+		\item Das Tripel bestendend aus Subjekt, Prädikat, Objekt
 		\item Verschiedene Syntaxen (N-Triples, Turtle, RDF/XML)
 		\item Beispiele für Serialisierungen von Tripelmengen
 		\item RDF programmatisch Lesen und Schreiben: Python
