@@ -109,10 +109,10 @@
 	
 	\begin{itemize}
 		\item Das \texttt{rdf:type} Prädikat ist Teil des RDF Vokabular
-		\item Es wird benutzt um einem URI einen Typ zuzuordnen
-		\item Die URI referenzierte Ressource gehört dem entsprechenden Typ
+		\item Es wird benutzt um ein URI einem Typ zuzuordnen
+		\item Die URI referenzierte Ressource ist von entsprechendem Typ
 		\item In Turtle auch mit `\texttt{a}' kürzbar
-		\item Solche Typisierung im Semantischen Web von zentraler Bedeutung
+		\item Solche Typisierung ist im Semantischen Web von zentraler Bedeutung
 		\item Mehr dazu in RDF Schema
 	\end{itemize}
 	
@@ -183,7 +183,9 @@
 	\begin{itemize}
 		\item Typisierte Literale müssen entsprechend Serialisiert werden
 		\item In graphischer Darstellung wird meist \texttt{"..."\^{}\^{}<...>} verwendet
-		\item Notation auch von Turtle und N-Triples Syntaxen verwendet
+		\item Innerhalb Klammern steht der Datentyp, als URI
+		\item Turtle und N-Triples übernehmen diese Notation ebenfalls
+		\item Abkürzung mittles Präfix möglich, Beispiel: \texttt{"..."\^{}\^{}xsd:...}
 	\end{itemize}
 	
 	\vspace{1cm}
@@ -207,12 +209,8 @@
   ex:Earth ex:radius "6371.0"^^xsd:decimal ;
     ex:label "Earth"^^<http://www.w3.org/2001/XMLSchema#string> .
 		\end{lstlisting}
-		
-	\vspace{0.2cm}
 	
-	\centering\noindent\rule{8cm}{0.4pt}
-	
-	\vspace{0.2cm}
+	\vspace{1.5cm}
 	
 	\small
 	\begin{lstlisting}
@@ -288,11 +286,7 @@
   ex:Earth ex:label "Earth"@en, "Erde"@de, "Terra"@it .
 	\end{lstlisting}
 	
-	\vspace{0.2cm}
-	
-	\centering\noindent\rule{8cm}{0.4pt}
-	
-	\vspace{0.2cm}
+	\vspace{1cm}
 	
 	\small
 	\begin{lstlisting}	
@@ -328,7 +322,7 @@
 		\item Daten werden oft in listenartige Strukturen organisiert
 		\item RDF stellt dafür verschiedene Konstrukte zur Verfügung
 		\item Für offene (\emph{containers}) und geschlossene (\emph{collections}) Listen
-		\item Es handelt sich hier nur um kürzungen für RDF Graphen
+		\item Es handelt sich hier nur um Kürzungen für RDF Graphen
 		\item Also \emph{``syntactic sugar''} für eine ansonsten (etwas) längere Form
 	\end{itemize}
 	
@@ -341,7 +335,7 @@
 		\begin{itemize}
 			\item \emph{rdf:Seq}: Geordnete Liste
 			\item \emph{rdf:Bag}: Ungeordnete Liste
-			\item \emph{rdf:Alt}: Liste an alternativen
+			\item \emph{rdf:Alt}: Liste an Alternativen
 		\end{itemize}
 		\item Diese Konstrukte haben nur informelle Semantik (Bedeutung)
  		\item Eine Anwendung kann die zusätzliche Information wahrnehmen
@@ -421,7 +415,7 @@
 		\item Man kann immer weitere Elemente hinzufügen (\texttt{rdf:\_n})
 		\item Für geschlossene Listen stellt RDF \emph{collections} zur Verfügung
 		\item Wie bei offenen Listen, handelt es sich auch hier um Kurzformen
-		\item Sprich kurzgefasstere RDF Serialisierungen
+		\item Sprich kurzgefasste RDF Serialisierungen
 	\end{itemize}
 	
 \end{frame}
