@@ -19,7 +19,7 @@ Unterlagen und Material für die Vorlesung "Grundlagen XML und RDF" (BIM-108-01)
 |10. | 28.5. | SPARQL: Fortgeschrittene Themen |
 |11. | 4.6. | Einführung in RDF Schema |
 |12. | 11.6.  | Ontologien mit RDF Schema |
-|13. | 18.6. | Tools für RDF |
+|13. | 18.6. | XML und RDF im Informationsmanagement |
 |14. | 25.6. | XML und RDF: Rückschau und Ausblick |
 |    | 10.7. | Klausur 10-12 Uhr, zusammengelegt mit BIM-108-02 |
 
