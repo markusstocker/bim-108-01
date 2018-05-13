@@ -1,0 +1,516 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usetikzlibrary{shapes.geometric}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\tikzset{node style/.style={
+		draw=blue,
+		thick,
+		fill=blue!70,
+		text=white,
+		ellipse,
+		minimum width=2cm,
+		minimum height=0.75cm,
+		font=\small,
+		outer sep=3pt,
+	},
+	blank style/.style={
+		draw=black,
+		thick,
+		fill=white,
+		text=white,
+		ellipse,
+		minimum width=2cm,
+		minimum height=0.75cm,
+		font=\small,
+		outer sep=3pt,
+	},
+	literal style/.style={
+		draw=red,
+		thick,
+		fill=red!70,
+		text=white,
+		rectangle,
+		minimum width=2cm,
+		minimum height=0.75cm,
+		font=\small,
+		outer sep=3pt,
+	},
+	edge style/.style={
+		#1,
+		text=black,
+		font=\footnotesize,
+		above
+	}
+}
+
+\makeatletter
+\newcommand\SoulColor{%
+	\let\set@color\beamerorig@set@color
+	\let\reset@color\beamerorig@reset@color}
+\makeatother
+
+\lstset{language=XML}
+
+\title{SPARQL: Die RDF Abfragesprache}
+\author{Markus Stocker}
+\date{14. Mai 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Rekapitulation}
+	
+	\begin{itemize}
+		\item Wozu wird das Prädikat \texttt{rdf:type} verwendet?
+		\item Nennen Sie einige XSD Datentypen
+		\item Erläutern Sie warum diese ungleich sind
+		\begin{itemize}
+			\item \texttt{"14.5"}
+			\item \texttt{"14.5"\^{}\^{}xsd:string}
+			\item \texttt{"14.5"\^{}\^{}xsd:decimal}
+		\end{itemize}
+		\item Welche RDF Listen gibt es und wozu verwendet man diese?
+		\item Was ist Reifizierung?
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Übersicht}
+	
+	\begin{itemize}
+		\item Einführung in SPARQL
+		\item Konzepte
+		\item Beispiele
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	
+	\huge
+	\begin{center}
+		Was ist SQL\\und wozu verwendet man die Sprache?
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{Eine Abfragesprache für RDF}
+	
+	\begin{itemize}
+		\item Mit RDF kann man Information maschinenlesbar beschreiben
+		\item Zum Beispiel ``Erde ist ein Planet mit Radius 6371 km''
+		\item Nun möchte man auf solche Information zugreifen können
+		\item Zum Beispiel ``Alle Planeten mit Radius grösser als 6000 km''
+		\item Dazu benötigt man eine Abfragesprache
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{SPARQL}
+
+	\begin{itemize}
+		\item \textbf{SPARQL} \textbf{P}rotocol \textbf{A}nd \textbf{R}DF \textbf{Q}uery \textbf{L}anguage
+		\item Ermöglicht Zugang auf in RDF beschriebene Information
+		\item Erinnert etwas an die Structured Query Language (SQL)
+		\item Natürlich zugeschnitten auf RDF Graphen
+		\item W3C Recommendation seit 2008
+		\item Neuere Version SPARQL 1.1 seit 2013
+	\end{itemize}
+		
+\end{frame}
+
+\begin{frame}[fragile]{SPARQL: Beispiel}
+	
+	\small
+	\begin{lstlisting}
+  PREFIX ex: <http://example.org#> 
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+	
+  SELECT ?label
+  WHERE {
+    ?planet rdf:type ex:Planet .
+    ?planet rdfs:label ?label .
+  }
+  
+  =>
+  
+  | label															|
+  | ------------------- |
+  | "Earth"^^xsd:string  |
+  | ------------------- |
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{\emph{Triple Pattern}}
+	
+	\begin{itemize}
+		\item Wie besprochen ist das Tripel ein zentrales Konstrukt in RDF
+		\item Ein RDF Dokument ist eine Tripelmenge
+		\item Um diese Menge abzufragen definiert man Tripelmuster
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\emph{Triple Pattern}: Beispiel}
+	
+	Ein RDF Dokument mit einem Tripel
+	\vspace{0.5cm}
+	\small
+	\begin{lstlisting}
+  @prefix ex: <http://example.org#> .
+  @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+  
+  ex:Earth rdf:type ex:Planet .
+	\end{lstlisting}
+	\vspace{1cm}\normalsize
+	Ein (passendes) \emph{triple pattern}
+	\vspace{0.5cm}
+	\small
+	\begin{lstlisting}		
+  ?planet rdf:type ex:Planet .
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{\emph{Triple Pattern}: Variabel}
+	
+	\begin{itemize}
+		\item Zentral für das Tripelmuster ist die Variabel
+		\item Ein \emph{triple pattern} kann eine oder mehrere Variabeln enthalten
+		\item Beliebig in Subjekt-, Prädikat- oder Objektposition
+		\item Variabeln beginnen mit einem Fragezeichen (\texttt{?})
+		\item Variabelname kann frei gewählt werden
+		\item Sollte allerdings sinnvoll sein: \texttt{?planet} besser als \texttt{?p45t}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Variabel: Beispiele}
+	
+	\small
+	\begin{lstlisting}		
+  ?planet rdf:type ex:Planet .
+  
+  ex:Earth rdf:type ?type .
+  
+  ex:Earth ?predicate ?object .
+  
+  ?subject rdf:type ?object .
+  
+  ?subject ?predicate ?object .
+  
+  ?s ?p ?o .
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Abfrage Ausführen: Tripelmuster über -menge Auswerten}
+	
+	\begin{itemize}
+		\item In einer Abfrage wird das Muster über eine Menge ausgewertet
+		\item Es werden Variabeln mit RDF Knoten oder Kanten ersetzt
+		\item Diese Ersetzung ergibt das Resultat der Abfrage
+	\end{itemize}
+	
+\end{frame}
+
+\lstset{escapeinside={<@}{@>}}
+\begin{frame}[fragile]{Muster über Menge Auswerten: Beispiel}
+	
+	Das Tripelmuster
+	\vspace{0.1cm}\small
+	\begin{lstlisting}		
+  ?planet rdf:type ex:Planet .
+    \end{lstlisting}
+   	\vspace{0.3cm}\normalsize
+    Auswertung über Tripelmenge
+   	\vspace{0.1cm}\small
+	\begin{lstlisting}
+  ex:Earth rdfs:label "Earth" .
+  <@\textcolor{blue}{ex:Earth rdf:type ex:Planet}@> .
+  ex:Mars rdfs:label "Mars" .
+  ex:Earth ex:radius "6371"^^xsd:decimal .
+  <@\textcolor{blue}{ex:Mars rdf:type ex:Planet}@> .
+    \end{lstlisting}
+   	\vspace{0.3cm}\normalsize
+    Resultat der Abfrage mit Variabelersetzung
+   	\vspace{0.1cm}\small
+	\begin{lstlisting}
+  ?planet <- ex:Earth
+  ?planet <- ex:Mars
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}{\emph{Basic Graph Pattern}}
+	
+	\begin{itemize}
+		\item Mit einem \emph{triple pattern} kann man keine komplexe Abfragen stellen
+		\item Dazu benötigt man eine \emph{triple pattern} Menge
+		\item Auch \emph{basic graph pattern} (BGP) genannt
+		\item Ein BGP kann natürlich aus einem einzigen \emph{triple pattern} bestehen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\emph{Basic Graph Pattern}: Beispiel}
+    
+    \Large
+	\begin{lstlisting}		
+  ?planet rdf:type ex:Planet .
+  ?planet ex:radius ?radius .
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Verbindungen (\emph{Joins})}
+	
+	\begin{itemize}
+		\item Variabelnamen definieren Verbindungen zwischen \emph{triple patterns}
+		\item Können beliebig über Subjekte, Prädikate, Objekte definiert werden
+		\item Gleichbenannte Variabeln müssen auf gleiche Knoten/Kanten ersetzen
+	\end{itemize}
+	
+	\vspace{0.5cm}
+	\large
+	\begin{lstlisting}		
+  <@\textcolor{red}{?planet}@> rdf:type ex:Planet .
+  <@\textcolor{red}{?planet}@> ex:radius ?radius .
+  <@\textcolor{red}{?planet}@> ex:satellite <@\textcolor{blue}{?satellite}@> .
+  <@\textcolor{blue}{?satellite}@> rdfs:label ?label .
+    \end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\emph{Group Graph Pattern}}
+	
+	\begin{itemize}
+		\item \emph{Basic graph patterns} können gruppiert werden
+		\item Dazu verwendet man geschweifte Klammern, \texttt{\{} und \texttt{\}}
+		\item Bedingungen (z.B. \texttt{FILTER}) können so auf Gruppen limitiet werden
+	\end{itemize}
+	
+	\begin{lstlisting}
+  {
+    ?planet rdf:type ex:Planet .
+    ?planet ex:radius ?radius .
+  }
+
+  {
+    { ?planet rdf:type ex:Planet . }
+    { ?planet ex:radius ?radius . }
+  }
+	\end{lstlisting}
+	    
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{FILTER}}
+
+	\begin{itemize}
+		\item \texttt{FILTER} ermöglicht Angabe von Bedingungen
+		\item Variabelnersetzungen müssen diese erfüllen
+		\item Somit eine Einschränkung der Resultatsmenge
+		\item Geltungsbereich ist das \emph{group graph pattern} welches \texttt{FILTER} definiert
+	\end{itemize}
+	
+	\begin{lstlisting}
+  {
+    ?planet rdf:type ex:Planet .
+    ?planet ex:radius ?radius .
+    FILTER (?radius > 6000)
+  }
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{\texttt{FILTER}: Operatoren}
+	
+	\begin{itemize}
+		\item Vergleichs, boolesche, arithmetische und spezielle Operatoren
+		\item Vergleichsoperatoren: \texttt{=}, \texttt{>}, \texttt{<}, \texttt{>=}, \texttt{<=}, \texttt{!=}
+		\item Definiert für Datentypen mit natürlicher Ordnung, inklusive Zeit
+		\item Boolesche Operatoren: \texttt{\&\&}, \texttt{||}, \texttt{!}
+		\item Arithmetische Operatoren: \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}
+		\item Definiert für numerische Werte
+		\item Einige spezielle Operatoren: \texttt{LANG()}, \texttt{DATATYPE()}, \texttt{REGEX()} 
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{FILTER} Operatoren: Beispiele}
+	
+	\begin{lstlisting}
+  ?planet rdf:type ex:Planet .
+  ?planet rdfs:label ?label .
+  ?planet ex:radius ?radius .
+  FILTER (?radius > 6000 && REGEX(?label, "^E"))
+  FILTER (DATATYPE(?radius) = xsd:decimal)
+  FILTER (LANG(?label) = "en")
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{OPTIONAL}}
+	
+	\begin{itemize}
+		\item Ermöglicht die Definition von optionalen \emph{group graph patterns}
+		\item Optionale \emph{patterns} müssen Variabeln nicht zwingend ersetzen
+		\item Fehlt die Ersetzung wird das Resultat nicht aus der Menge genommen
+		\item Variabeln in optionalen \emph{patterns} können somit ungebunden sein
+	\end{itemize}
+	
+	\small
+	\begin{lstlisting}
+  {
+    ?planet rdf:type ex:Planet .
+    OPTIONAL { ?planet ex:radius ?radius }
+  }
+  
+  | planet				| radius														|
+  | ----------| ------------------- |
+  | ex:Earth		| "6371"^^xsd:decimal |
+  | ex:Mars			|																					|
+  | ----------| ------------------- |
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{OPTIONAL}: Beispiele}
+	
+	\small
+	\begin{lstlisting}
+  {
+    ?planet rdf:type ex:Planet .
+    OPTIONAL { 
+      ?planet ex:radius ?radius .
+      ?planet ex:satellite ?satellite .
+    }
+  }
+  
+  {
+    ?planet rdf:type ex:Planet .
+    OPTIONAL { ?planet ex:radius ?radius . }
+    OPTIONAL { ?planet ex:satellite ?satellite . }
+  }
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{UNION}}
+	
+	\begin{itemize}
+		\item Ermöglicht die Definition von alternativen \emph{group graph patterns}
+		\item Bildet die Vereinigungsmenge der unabhängigen Resultatsmengen
+	\end{itemize}
+	
+	\small
+	\begin{lstlisting}
+  {
+    ?planet rdf:type ex:Planet .
+    { ?planet ex:radius ?radius . }
+    UNION
+    { ?planet ex:satellite ?satellite . }	
+  }
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Literale in SPARQL}
+	
+	\begin{itemize}
+		\item RDF unterscheidet typisierte und untypisierte Literale
+		\item Somit sind \texttt{"6371"} und \texttt{"6371"\^{}\^{}xsd:decimal} nicht gleich
+		\item Datentypen in Abfragen könnnen die Resultatsmenge verändern
+	\end{itemize}
+	
+	\small
+	\begin{lstlisting}
+  ?planet ex:radius "6371" .
+  
+  ?planet ex:radius "6371"^^xsd:decimal .
+  
+  ?planet ex:radius "6371.0"^^xsd:decimal .
+    
+  ?planet ex:radius "6371"^^xsd:string .
+  
+  ?planet ex:radius 6371 .
+		\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{\emph{Blank Nodes}}
+	
+	\begin{itemize}
+		\item Nicht-ausgezeichnete (\emph{non-distinguished}) Variabeln
+		\item Keine Referenzen auf spezifische RDF \emph{blank nodes}
+		\item Können in Form \texttt{\_:abc} oder \texttt{[]} geschrieben werden
+		\item Werden in der Abfrageverarbeitung ersetzt
+		\item Sind aber nicht Teil der Resultatsmenge
+		\item Der gleiche \emph{blank node} kann nicht in zwei BGPs vorkommen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{\emph{Blank Nodes}: Beispiele}
+	
+	\small
+	\begin{lstlisting}
+  # Mit ausgezeichneten Variabeln
+  ?planet rdf:type ex:Planet .
+  ?planet ex:radius ?radius .
+  ?planet ex:satellite ?satellite .
+  ?satellite rdfs:label ?label .
+     
+  # Mit blank nodes (nich-ausgezeichnete Variabeln)
+  _:a1 rdf:type ex:Planet .
+  _:a1 ex:radius ?radius .
+  _:a1 ex:satellite _:a2 .
+  _:a2 rdfs:label ?label .
+  
+  # Mit blank nodes (verkuerzte Form)
+  [] rdf:type ex:Planet ;
+     ex:radius ?radius ;
+     ex:satellite [ rdfs:label ?label ]
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Zusammenfassung}
+	
+	\begin{itemize}
+		\item Um RDF Daten zu verarbeiten benötigt es einer Abfragesprache
+		\item Mittels SPARQL flexibel auf RDF Daten zugreifen
+		\item Indem die gewünschte Resultatsmenge deklariert wird
+		\item Das \emph{triple pattern} als zentrales SPARQL Konstrukt
+		\item Subjekt, Prädikat, Objekt dürften Variabel sein
+		\item Eine Abfrage wertet solche Muster über Tripelmenge aus
+	\end{itemize}
+	
+\end{frame}
+
+\end{document}
