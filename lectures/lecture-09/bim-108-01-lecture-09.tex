@@ -144,7 +144,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{SPARQL: Beispiel}
-	
+
 	\small
 	\begin{lstlisting}
   PREFIX ex: <http://example.org#> 
@@ -161,7 +161,7 @@
   
   | label															|
   | ------------------- |
-  | "Earth"^^xsd:string  |
+  | "Earth"													|			
   | ------------------- |
 	\end{lstlisting}
 	
@@ -170,9 +170,9 @@
 \begin{frame}{\emph{Triple Pattern}}
 	
 	\begin{itemize}
-		\item Wie besprochen ist das Tripel ein zentrales Konstrukt in RDF
+		\item Wie besprochen, ist das Tripel ein zentrales Konstrukt in RDF
 		\item Ein RDF Dokument ist eine Tripelmenge
-		\item Um diese Menge abzufragen definiert man Tripelmuster
+		\item Mit Tripelmuster (\emph{triple pattern}) kann man solche Mengen abfragen
 	\end{itemize}
 	
 \end{frame}
@@ -243,13 +243,13 @@
 \lstset{escapeinside={<@}{@>}}
 \begin{frame}[fragile]{Muster über Menge Auswerten: Beispiel}
 	
-	Das Tripelmuster
+	Auswertung Tripelmuster
 	\vspace{0.1cm}\small
 	\begin{lstlisting}		
   ?planet rdf:type ex:Planet .
     \end{lstlisting}
    	\vspace{0.3cm}\normalsize
-    Auswertung über Tripelmenge
+    über die Tripelmenge (Tripel die auf Muster passen in Blau)
    	\vspace{0.1cm}\small
 	\begin{lstlisting}
   ex:Earth rdfs:label "Earth" .
@@ -259,11 +259,11 @@
   <@\textcolor{blue}{ex:Mars rdf:type ex:Planet}@> .
     \end{lstlisting}
    	\vspace{0.3cm}\normalsize
-    Resultat der Abfrage mit Variabelersetzung
+    Resultat der Abfrage mit zwei Variabelersetzungen
    	\vspace{0.1cm}\small
 	\begin{lstlisting}
-  ?planet <- ex:Earth
-  ?planet <- ex:Mars
+  1. ?planet <- ex:Earth
+  2. ?planet <- ex:Mars
 	\end{lstlisting}
 \end{frame}
 
@@ -293,7 +293,7 @@
 	\begin{itemize}
 		\item Variabelnamen definieren Verbindungen zwischen \emph{triple patterns}
 		\item Können beliebig über Subjekte, Prädikate, Objekte definiert werden
-		\item Gleichbenannte Variabeln müssen auf gleiche Knoten/Kanten ersetzen
+		\item Gleichbenannte Variabeln müssen mit gleichen Knoten ersetzt werden
 	\end{itemize}
 	
 	\vspace{0.5cm}
@@ -368,6 +368,7 @@
   ?planet rdf:type ex:Planet .
   ?planet rdfs:label ?label .
   ?planet ex:radius ?radius .
+  
   FILTER (?radius > 6000 && REGEX(?label, "^E"))
   FILTER (DATATYPE(?radius) = xsd:decimal)
   FILTER (LANG(?label) = "en")
@@ -486,7 +487,7 @@
   ?planet ex:satellite ?satellite .
   ?satellite rdfs:label ?label .
      
-  # Mit blank nodes (nich-ausgezeichnete Variabeln)
+  # Mit blank nodes (nicht-ausgezeichneten Variabeln)
   _:a1 rdf:type ex:Planet .
   _:a1 ex:radius ?radius .
   _:a1 ex:satellite _:a2 .
