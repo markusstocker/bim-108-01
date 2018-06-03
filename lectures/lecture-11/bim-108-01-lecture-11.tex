@@ -1,0 +1,544 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usetikzlibrary{shapes.geometric}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{lightgray}{gray}{0.8}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\tikzset{node style/.style={
+		draw=blue,
+		thick,
+		fill=blue!70,
+		text=white,
+		ellipse,
+		minimum width=2cm,
+		minimum height=0.75cm,
+		font=\small,
+		outer sep=3pt,
+	},
+	blank style/.style={
+		draw=black,
+		thick,
+		fill=white,
+		text=white,
+		ellipse,
+		minimum width=2cm,
+		minimum height=0.75cm,
+		font=\small,
+		outer sep=3pt,
+	},
+	literal style/.style={
+		draw=red,
+		thick,
+		fill=red!70,
+		text=white,
+		rectangle,
+		minimum width=2cm,
+		minimum height=0.75cm,
+		font=\small,
+		outer sep=3pt,
+	},
+	edge style/.style={
+		#1,
+		text=black,
+		font=\footnotesize,
+		above
+	}
+}
+
+\makeatletter
+\newcommand\SoulColor{%
+	\let\set@color\beamerorig@set@color
+	\let\reset@color\beamerorig@reset@color}
+\makeatother
+
+\lstset{language=XML}
+
+\title{Einführung in RDF Schema}
+\author{Markus Stocker}
+\date{4. Juni 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Rekapitulation}
+	
+	\begin{itemize}
+		\item Was ist ein \emph{triple pattern}?
+		\item Welche Resultatformate gibt es in SPARQL?
+		\item Wozu verwendet man \texttt{LIMIT} und \texttt{OFFSET}?
+		\item Was leistet SPARQL Update?
+		\item Worum geht es bei der Abfragenoptimierung?
+		\item In welchem Zusammenhang haben wir über Schema gesprochen?
+		\item Welche Sprachen haben wir angeschaut?
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Übersicht}
+	
+	\begin{itemize}
+		\item Was ist RDF Schema?
+		\item Konzepte und Sprachkonstrukte
+		\item Beispiele
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Schema: Schon wieder?}
+	
+	\begin{itemize}
+		\item Tripel als fundamentale Einheit in RDF
+		\item RDF Daten ergeben eine Tripelmenge
+		\item Solche Mengen können sehr gross sein
+		\item Milliarden, sogar Billionen oder mehr
+		\item Solche Mengen sind unübersichtlich
+		\item Worüber sagen die Tripel etwas aus?
+		\item Eine Übersicht zu erhalten ist auf solchen Mengen schwierig
+		\item Schema kommt dabei zur Hilfe
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF Schema}
+	
+	\begin{itemize}
+		\item RDF Schema ermöglicht das Organisieren von Tripelmengen
+		\item Es ist eine Sprache und wird meist mit RDFS gekürzt
+		\item Version 1.0 seit 2004 eine W3C Empfehlung (\emph{Recommendation})
+		\item Seit 2014 in der Version 1.1 (ebenfalls W3C Empfehlung)
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF Schema}
+	
+	\begin{itemize}
+		\item Zentral ist die Gruppierung von Ressourcen
+		\item Wie z.B. \texttt{(a,b,...)} sind Planeten; \texttt{(x,y,...)} sind Satelliten
+		\item RDFS stellt Sprachkonstrukte zur Verfügung 
+		\item Die u.A. solche Gruppierungen ermöglichen
+		\item Gruppen werden \emph{Klassen} genannt
+		\item Man kann mit RDFS also aussagen, dass \texttt{K} eine Klasse ist
+		\item \texttt{K} steht hier für die Klasse der z.B. Planeten, Tiere, Studenten, ...
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Ressourcen Gruppieren: Beispiel}
+	
+    \begin{center}
+    	\begin{tabular}{c}
+			\begin{lstlisting}
+ex:ghf5 rdfs:label "Moon" .
+ex:12bv ex:radius "6371" .
+ex:fg54 rdfs:label "Mars" .
+ex:12bv ex:satellite ex:ghf5 .
+ex:12bv rdfs:label "Earth" .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+	\begin{itemize}
+		\item Folgende Ressourcen: \texttt{ex:12bv, ex:fg54, ex:ghf5} 
+		\item Diese kann man gruppieren, und zwar
+		\item \texttt{(ex:12bv, ex:fg54)} und \texttt{(ex:ghf5)}
+		\item Man erhält also zwei Klassen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Klassen}
+	
+	\begin{itemize}
+		\item Klassen sind benannt, mittels URIs
+		\item Klassenbildung führt somit zu neuen Terme
+		\item Dies sind Elemente eines Vokabulars
+		\item Ein Vokabular das beschreibt worüber eine Tripelmenge ``spricht''
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Klassen Benennen: Beispiel}
+	
+    \begin{center}
+    	\begin{tabular}{c}
+			\begin{lstlisting}
+ex:ghf5 rdfs:label "Moon" .
+ex:12bv ex:radius "6371" .
+ex:fg54 rdfs:label "Mars" .
+ex:12bv ex:satellite ex:ghf5 .
+ex:12bv rdfs:label "Earth" .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+	\begin{itemize}
+		\item Die Klasse der Planeten: \texttt{ex:Planet = (ex:12bv, ex:fg54)} 
+		\item Die Klasse der Satelliten: \texttt{ex:Satellite = (ex:ghf5)}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Klassen Spezifizieren}
+	
+	\begin{itemize}
+		\item URI alleine genügt nicht um auszusagen, dass ein Name eine Klasse ist
+		\item Sind \texttt{ex:Planet}, \texttt{ex:fg54} Klassen? Unbestimmt
+		\item Man muss Klassennamen explizit als solche definieren
+		\item Dafür stellt RDFS Sprachkonstrukte zur Verfügung
+		\item Insbesondere die ``Klasse aller Klassen'': \texttt{rdfs:Class}
+		\item Diese ``Metaklasse'' ist Teil der RDFS Sprache
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Klassen Spezifizieren: Beispiel}
+	
+    \begin{center}
+    	\begin{tabular}{c}
+			\begin{lstlisting}
+ex:Planet rdf:type rdfs:Class .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{Klassen Instanzen}
+	
+	\begin{itemize}
+		\item Hat man Klassen definiert, können Instanzen erzeugt werden
+		\item Instanzen sind Elemente einer Klasse
+		\item Das Prädikat \texttt{rdf:type} definiert die Klasse einer Instanz
+		\item So typisiert man Ressourcen
+		\item Sprich, definiert Ressourcen als Elemente einer Menge
+	\end{itemize}
+	
+\end{frame}
+
+\lstset{escapeinside={<@}{@>}}
+\begin{frame}[fragile]{Klassen Instanzen: Beispiel}
+	
+    \begin{center}
+    	\begin{tabular}{c}
+    		\begin{lstlisting}
+ex:Planet rdf:type <@\textcolor{red}{rdfs:Class}@> .
+ex:12bv rdf:type ex:Planet .
+    		\end{lstlisting}
+    	\end{tabular}
+    \end{center}
+    
+    \vspace{0.5cm}
+    
+	\begin{itemize}
+		\item \texttt{rdfs:Class} ist die Klasse aller Klassen
+	\end{itemize}
+	
+\end{frame}
+
+\lstset{escapeinside={<@}{@>}}
+\begin{frame}[fragile]{Klassen Instanzen: Beispiel}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+<@\textcolor{red}{ex:Planet rdf:type rdfs:Class}@> .
+ex:12bv rdf:type ex:Planet .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+	\vspace{0.5cm}
+	
+	\begin{itemize}
+		\item {\color{lightgray} \texttt{rdfs:Class} ist die Klasse aller Klassen}
+		\item \texttt{ex:Planet} ist eine Instanz der Klasse aller Klassen
+		\item \texttt{ex:Planet} ist somit eine Klasse
+	\end{itemize}
+	
+\end{frame}
+
+\lstset{escapeinside={<@}{@>}}
+\begin{frame}[fragile]{Klassen Instanzen: Beispiel}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:Planet rdf:type rdfs:Class .
+<@\textcolor{red}{ex:12bv rdf:type ex:Planet}@> .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+	\vspace{0.5cm}
+	
+	\begin{itemize}
+		\item {\color{lightgray} \texttt{rdfs:Class} ist die Klasse aller Klassen}
+		\item {\color{lightgray} \texttt{ex:Planet} ist eine Instanz der Klasse aller Klassen}
+		\item {\color{lightgray} \texttt{ex:Planet} ist somit eine Klasse}
+		\item \texttt{ex:12bv} ist eine Instanz der Klasse \texttt{ex:Planet}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Die Metaklasse ist eine Klasse}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+rdfs:Class rdf:type rdfs:Class .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+	\vspace{0.5cm}
+	
+	\begin{itemize}
+		\item Die Klasse aller Klassen (die Metaklasse) ist selbst eine Klasse!
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF und RDFS Klassen (Auswahl)}
+	
+	\begin{itemize}
+		\item \texttt{rdfs:Resource}, die Klasse aller Ressourcen (Klassen, Instanzen, ...)
+		\item \texttt{rdfs:Class}, die Klasse aller Klassen
+		\item \texttt{rdfs:Literal}, die Klasse aller Literale (Werte)
+		\item \texttt{rdfs:Datatype}, die Klasse aller Datentypen (Instanzen sind Klassen)
+		\item \texttt{rdf:Property}, die Klasse aller Prädikate (Relationen)
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Unterklassen (\emph{sub classes})}
+	
+	\begin{itemize}
+		\item Wir haben die Klasse \texttt{ex:Planet} bereits eingeführt
+		\item In unserem Sonnensystem werden Planeten in zwei Gruppen unterteilt
+		\item Innere Planeten und äussere Planeten
+		\item Innere Planeten sind näher an der Sonne, kleiner und steinig
+		\item Äussere Planeten sind weiter entfernt, grösser und bestehen aus Gasen
+		\item Innere Planeten: Merkur, Venus, Erde und Mars
+		\item Äussere Planeten: Jupiter, Saturn, Uranus und Neptun
+		\item Natürlich sind das alle Planeten
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Unterklassen}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:Planet rdf:type rdfs:Class .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Unterklassen}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:Planet rdf:type rdfs:Class .
+
+ex:InnerPlanet rdf:type rdfs:Class .
+ex:OuterPlanet rdf:type rdfs:Class .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Unterklassen}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:Planet rdf:type rdfs:Class .
+ex:InnerPlanet rdf:type rdfs:Class .
+ex:OuterPlanet rdf:type rdfs:Class .
+
+ex:12bv rdf:type ex:InnerPlanet . 
+ex:fg54 rdf:type ex:InnerPlanet .
+ex:rs01 rdf:type ex:OuterPlanet .
+ex:3op4 rdf:type ex:OuterPlanet .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+	\begin{itemize}
+		\item Gut, aber es ist nun nicht klar, dass z.B. \texttt{ex:12bv} ein Planet ist
+		\item Bekannt ist nur, dass \texttt{ex:12bv} ein innerer Planet ist
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Unterklassen: \texttt{rdfs:subClassOf}}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:Planet rdf:type rdfs:Class .
+ex:InnerPlanet rdfs:subClassOf ex:Planet .
+ex:OuterPlanet rdfs:subClassOf ex:Planet .
+
+ex:12bv rdf:type ex:InnerPlanet . 
+ex:12bv rdfs:label "Earth" .
+<@\textcolor{red}{ex:12bv rdf:type ex:Planet .}@>
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+	\begin{itemize}
+		\item \texttt{ex:InnerPlanet} ist unterklasse der Klasse \texttt{ex:Planet}
+		\item \texttt{ex:OuterPlanet} ist unterklasse der Klasse \texttt{ex:Planet}
+		\item Beide sind somit Klassen
+		\item Explizit bekannt ist, dass \texttt{ex:12bv} Instanz von \texttt{ex:InnerPlanet} ist
+		\item Implizit ist, dass \texttt{ex:12bv} auch eine Instanz von \texttt{ex:12bv} ist
+		\item Weil alle inneren Planeten auch Planeten sind
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Unterklassen: \texttt{rdfs:subClassOf}}
+	
+	\begin{itemize}
+		\item \texttt{rdfs:subClassOf} ist ein Prädikat
+		\item Es ist somit eine Instanz der Klasse \texttt{rdf:Property}
+		\item Man kann damit Klassenhierarchien bilden
+		\item Ein ``super class of'' Prädikat gibt es in RDFS nicht
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Prädikate (\emph{Property})}
+	
+	\begin{itemize}
+		\item Prädikate sind Relationen zwischen Ressourcen
+		\item In RDFS sind Prädikate ebenfalls Ressourcen
+		\item Allerdings als eigene Klasse organisiert
+		\item Nämlich die Klasse aller Prädikate, \texttt{rdf:Property}
+		\item \texttt{rdf:Property} ist somit eine Klasse, kein Prädikat
+		\item Es ist eine Instanz der Klasse \texttt{rdfs:Class}
+		\item Instanzen der Klasse \texttt{rdf:Property} sind aber Prädikate
+		\item Tripel Prädikate werden automatisch also solche Instanzen behandelt
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Prädikate: Beispiel}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:radius rdf:type rdf:Property .
+
+ex:12bv ex:radius "6371" .
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{Unterprädikate (\emph{sub properties})}
+	
+	\begin{itemize}
+		\item RDFS erlaubt die Spezifikation von Unterprädikate
+		\item Dies ermöglicht die Erstellung von Prädikathierarchien
+		\item Man verwendet dazu das Prädikat \texttt{rdfs:subPropertyOf}
+	\end{itemize}
+	
+\end{frame}
+
+\lstset{escapeinside={<@}{@>}}
+\begin{frame}[fragile]{Unterprädikate: Beispiel}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:radius rdf:type rdf:Property .
+ex:physicalProperty rdf:type rdf:Property .
+
+ex:radius rdfs:subPropertyOf ex:physicalProperty .
+
+ex:12bv ex:radius "6371" .
+<@\textcolor{red}{ex:12bv ex:physicalProperty "6371" .}@>
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{Prädikatrestriktionen (\emph{property restrictions})}
+	
+	\begin{itemize}
+		\item Ermöglichen Aussagen über die Ressourcen die ein Prädikat verbindet
+		\item Insbesondere Aussagen über Klassenzugehörigkeit der Ressourcen
+		\item Klassenzugehörigkeit der Subjekte und Objekte eines Prädikats
+		\item Beispiel: Sind \texttt{A} und \texttt{B} verheiratet dann sind beide Personen
+		\item Dazu verwendet man \texttt{rdfs:domain} und \texttt{rdfs:range}
+		\item \texttt{rdfs:domain}: Klassenzugehörigkeit des Subjekts
+		\item \texttt{rdfs:range}: Klassenzugehörigkeit des Objekts
+		\item \texttt{rdfs:domain} und \texttt{rdfs:range} sind beides Prädikate
+	\end{itemize}
+	
+\end{frame}
+
+\lstset{escapeinside={<@}{@>}}
+\begin{frame}[fragile]{Prädikatrestriktionen: Beispiel}
+	
+	\begin{center}
+		\begin{tabular}{c}
+			\begin{lstlisting}
+ex:satellite rdf:type rdf:Property .
+ex:satellite rdfs:domain ex:Planet .
+ex:satellite rdfs:range ex:Satellite .
+
+ex:12bv ex:satellite ex:ghf5 .
+<@\textcolor{red}{ex:12bv rdf:type ex:Planet .}@>
+<@\textcolor{red}{ex:ghf5 rdf:type ex:Satellite .}@>
+			\end{lstlisting}
+		\end{tabular}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{Zusammenfassung}
+	
+	\begin{itemize}
+		\item Zentral in RDFS ist das Konzept der Gruppierung
+		\item Gruppierung von Ressourcen als benannte Klassen
+		\item Ermöglicht die Erstellung von abstraktem Vokabular
+		\item Dieses beschreibt Tripelmengen
+	\end{itemize}
+	
+\end{frame}
+
+\end{document}
