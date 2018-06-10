@@ -1,0 +1,102 @@
+@prefix : <http://webprotege.stanford.edu/project/BgcX6NT6wHpYhKl6E7nLEH#> .
+@prefix p: <http://www.ontology.org/product/> .
+@prefix q: <http://www.ontology.org/q/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix approva: <http://ontologies.org/approva/> .
+@base <http://webprotege.stanford.edu/project/BgcX6NT6wHpYhKl6E7nLEH> .
+
+<http://webprotege.stanford.edu/project/BgcX6NT6wHpYhKl6E7nLEH> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://webprotege.stanford.edu/Rf9XDGKvb2VNmCJW8UMHCj
+<http://webprotege.stanford.edu/Rf9XDGKvb2VNmCJW8UMHCj> rdf:type owl:ObjectProperty ;
+                                                        rdfs:subPropertyOf owl:topObjectProperty ;
+                                                        rdfs:domain <http://webprotege.stanford.edu/RDSLYDaeGhC662Qx1IPsYd> ;
+                                                        rdfs:range <http://webprotege.stanford.edu/R7cvl4ciFjVee4nYyshWV7g> ;
+                                                        rdfs:label "has satellite"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://webprotege.stanford.edu/R1N1GszEPmM0GV671FYxWB
+<http://webprotege.stanford.edu/R1N1GszEPmM0GV671FYxWB> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:subPropertyOf <http://webprotege.stanford.edu/R9uNjzRcYYYV7O0gMso2CTN> ;
+                                                        rdfs:label "has mass" .
+
+
+###  http://webprotege.stanford.edu/R9uNjzRcYYYV7O0gMso2CTN
+<http://webprotege.stanford.edu/R9uNjzRcYYYV7O0gMso2CTN> rdf:type owl:DatatypeProperty ;
+                                                         rdfs:subPropertyOf owl:topDataProperty ;
+                                                         rdfs:domain <http://webprotege.stanford.edu/RDSLYDaeGhC662Qx1IPsYd> ;
+                                                         rdfs:range xsd:decimal ;
+                                                         rdfs:label "has physical characteristic"@en .
+
+
+###  http://webprotege.stanford.edu/RDcbvnYHSebOwVSbB96w4Om
+<http://webprotege.stanford.edu/RDcbvnYHSebOwVSbB96w4Om> rdf:type owl:DatatypeProperty ;
+                                                         rdfs:subPropertyOf <http://webprotege.stanford.edu/R9uNjzRcYYYV7O0gMso2CTN> ;
+                                                         rdfs:label "has equatorial radius"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://webprotege.stanford.edu/R7cvl4ciFjVee4nYyshWV7g
+<http://webprotege.stanford.edu/R7cvl4ciFjVee4nYyshWV7g> rdf:type owl:Class ;
+                                                         rdfs:subClassOf owl:Thing ;
+                                                         rdfs:label "Solar System Satellite"@en .
+
+
+###  http://webprotege.stanford.edu/R8ckoTkEwLIpgYg16948ilv
+<http://webprotege.stanford.edu/R8ckoTkEwLIpgYg16948ilv> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://webprotege.stanford.edu/RDSLYDaeGhC662Qx1IPsYd> ;
+                                                         rdfs:label "Gas Giant"@en .
+
+
+###  http://webprotege.stanford.edu/RCwn6ZtHnhgdujrlVMkDQ9F
+<http://webprotege.stanford.edu/RCwn6ZtHnhgdujrlVMkDQ9F> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://webprotege.stanford.edu/RDSLYDaeGhC662Qx1IPsYd> ;
+                                                         rdfs:label "Terrestrial Planet"@en .
+
+
+###  http://webprotege.stanford.edu/RDSLYDaeGhC662Qx1IPsYd
+<http://webprotege.stanford.edu/RDSLYDaeGhC662Qx1IPsYd> rdf:type owl:Class ;
+                                                        rdfs:subClassOf owl:Thing ;
+                                                        rdfs:label "Solar System Planet"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://webprotege.stanford.edu/R9IvvwWnAk00KZuFsUx6FIU
+<http://webprotege.stanford.edu/R9IvvwWnAk00KZuFsUx6FIU> rdf:type owl:NamedIndividual ,
+                                                                  <http://webprotege.stanford.edu/RCwn6ZtHnhgdujrlVMkDQ9F> ;
+                                                         <http://webprotege.stanford.edu/Rf9XDGKvb2VNmCJW8UMHCj> <http://webprotege.stanford.edu/RCpGIlcL92437hsMavQa9lx> ;
+                                                         <http://webprotege.stanford.edu/RDcbvnYHSebOwVSbB96w4Om> 6371 ;
+                                                         rdfs:label "Earth"@en .
+
+
+###  http://webprotege.stanford.edu/RCpGIlcL92437hsMavQa9lx
+<http://webprotege.stanford.edu/RCpGIlcL92437hsMavQa9lx> rdf:type owl:NamedIndividual ,
+                                                                  <http://webprotege.stanford.edu/R7cvl4ciFjVee4nYyshWV7g> ;
+                                                         rdfs:label "Moon"@en .
+
+
+###  http://webprotege.stanford.edu/RMuYZTa5ZQ6x6Ji0dHettI
+<http://webprotege.stanford.edu/RMuYZTa5ZQ6x6Ji0dHettI> rdf:type owl:NamedIndividual ,
+                                                                 <http://webprotege.stanford.edu/RCwn6ZtHnhgdujrlVMkDQ9F> ;
+                                                        rdfs:label "Mars"@en .
+
+
+###  Generated by the OWL API (version 4.5.1) https://github.com/owlcs/owlapi
