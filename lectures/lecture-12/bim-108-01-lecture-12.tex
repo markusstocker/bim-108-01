@@ -26,47 +26,6 @@
 	commentstyle=\color{gray}\upshape
 }
 
-\tikzset{node style/.style={
-		draw=blue,
-		thick,
-		fill=blue!70,
-		text=white,
-		ellipse,
-		minimum width=2cm,
-		minimum height=0.75cm,
-		font=\small,
-		outer sep=3pt,
-	},
-	blank style/.style={
-		draw=black,
-		thick,
-		fill=white,
-		text=white,
-		ellipse,
-		minimum width=2cm,
-		minimum height=0.75cm,
-		font=\small,
-		outer sep=3pt,
-	},
-	literal style/.style={
-		draw=red,
-		thick,
-		fill=red!70,
-		text=white,
-		rectangle,
-		minimum width=2cm,
-		minimum height=0.75cm,
-		font=\small,
-		outer sep=3pt,
-	},
-	edge style/.style={
-		#1,
-		text=black,
-		font=\footnotesize,
-		above
-	}
-}
-
 \makeatletter
 \newcommand\SoulColor{%
 	\let\set@color\beamerorig@set@color
@@ -125,7 +84,7 @@
 		\item Beschreibung von ``Wissen'' über eine Domäne
 		\item Begriffe und Beziehungen eines Gegenstandsbereiches
 		\item Beispiel: Erdähnliche und Gas Planeten mit Satelliten
-		\item Eine maschinenverarbeitbar (formale) Beschreibung 
+		\item Eine maschinenverarbeitbare (formale) Beschreibung 
 		\item Beispiel: \texttt{TerrestrialPlanet rdfs:subClassOf Planet}
 	\end{itemize}
 	
@@ -187,7 +146,6 @@ ex:earth rdf:type ex:Planet
 		\item Das Tripel ist eine Aussage
 		\item \texttt{ex:earth} is hier eine Instanz
 		\item \texttt{ex:Planet} ist eine Klasse
-		\item Vokabular welches in Inhalten verwendet wird
 	\end{itemize}	
 	
 \end{frame}
@@ -258,10 +216,10 @@ ex:earth rdf:type ex:Planet
 	
 	\begin{itemize}
 		\item Zudem spielt der Zweck der Ontologie eine wichtige Rolle
-		\item Der Zweck bestimmt oft welche Aspekte man formalisiert
+		\item Oft bestimmt der Zweck welche Aspekte man formalisiert
 		\item Entwicklung von Ontologien also strukturiert angehen
 		\item Insbesondere auch Anforderungsanalyse durchführen
-		\item Ähnlichkeiten zur Entwicklung von Software
+		\item Ähnlich wie bei Entwicklung von Software
 	\end{itemize}
 	
 \end{frame}
@@ -269,8 +227,8 @@ ex:earth rdf:type ex:Planet
 \begin{frame}{Ontologien Entwickeln}
 	
 	\begin{itemize}
-		\item Weil komplex, zuerst schauen ob es bereits eine Ontologie gibt
-		\item Welche wiederverwendet werden kann, auch nur Teilweise
+		\item Zuerst schauen ob es bereits eine entsprechende \textit{}Ontologie gibt
+		\item Die wiederverwendet werden kann, auch nur Teilweise
 		\item Eventuell gibt es eine übergeordnete Ontologie
 		\item Welche abstrakteres Wissen formalisiert
 		\item Auf einer solchen Aufbauen ist oft hilfreich
@@ -283,7 +241,7 @@ ex:earth rdf:type ex:Planet
 	\begin{itemize}
 		\item Benötigt die Anwendung eine Ontologie, semantische Repräsentation?
 		\item Oder genügt eine klassische Datenbank (u.U. bereits vorhanden)?
-		\item Ist der Toolunterstützung adäquat für mein Projekt?
+		\item Ist die Toolunterstützung adäquat für mein Projekt?
 		\item Wie sind die Tools lizensiert und wie ausgereift sind sie?
 	\end{itemize}
 	
@@ -305,7 +263,7 @@ ex:earth rdf:type ex:Planet
 	\begin{itemize}
 		\item Übersetzung von Wissen in eine maschinenlesbare Form
 		\item Es gibt mehrere Arten von Quellen für Wissen
-		\item Z.B. Menschliche Köpfe, Bücher, Web, Datenbanken
+		\item Z.B. menschliche Köpfe, Bücher, Web, Datenbanken
 		\item Einige Quellen eignen sich besser als andere für Formalisierung
 	\end{itemize}
 	
@@ -370,7 +328,7 @@ ex:earth rdf:type ex:Planet
 	
 	\begin{itemize}
 		\item Datenbankinhalte können meist nach RDF übersetzt werden
-		\item Damit erhält man auf einfache weise semantische Aussagen
+		\item Damit erhält man auf einfache Weise semantische Aussagen
 		\item Schemainformation kann man zusätzlich verwenden
 		\item Um terminologisches Wissen aufzubauen
 		\item Andere Ontologien sind Quellen für bereits formalisiertes Wissen
@@ -454,9 +412,13 @@ ex:earth rdf:type ex:Planet
 \begin{frame}{Zusammenfassung}
 	
 	\begin{itemize}
-		\item Die RDFS Sprache hat eine relative kleine Expressivität
+		\item Mit Ontologien kann man Wissen formalisieren
+		\item Mit RDFS können einfache Ontologien erstellt werden
+		\item Die Sprache hat eine relativ kleine Expressivität
 		\item Man kann nur ``einfaches Wissen'' ausdrücken
 		\item Es gibt noch weitere ausdruckstärkere Sprachen (OWL) 
+		\item Die Entwicklung von Ontologien ist generell komplex
+		\item Die Aufgabe muss somit strukturiert angegangen werden
 	\end{itemize}
 	
 \end{frame}
