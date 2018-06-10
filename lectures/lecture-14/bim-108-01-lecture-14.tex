@@ -1,0 +1,391 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usecolortheme{sidebartab}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{soul}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usepackage[export]{adjustbox}
+\usetikzlibrary{shapes.geometric}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{lightgray}{gray}{0.8}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{darkblue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\makeatletter
+\newcommand\SoulColor{%
+	\let\set@color\beamerorig@set@color
+	\let\reset@color\beamerorig@reset@color}
+\makeatother
+
+\lstset{language=XML}
+
+\title{XML und RDF: Rückblick und Ausblick}
+\author{Markus Stocker}
+\date{25. Juni 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[plain]{}
+	
+	\huge
+	\begin{center}
+		Rückblick
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}{XML}
+	
+	\begin{itemize}
+		\item Extensible Markup Language
+		\item Eine erweiterbare, beschreibende \emph{meta} Auszeichnungssprache
+		\item Hierarchisch (semi-) strukturierte Daten (Baumstruktur)
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML: Wichtige Sprachkonstrukte}
+	
+	\begin{itemize}
+		\item Tag
+		\begin{itemize}
+			\item Beginnt mit \texttt{<} und endet mit \texttt{>}
+			\item Drei Arten: \emph{opening}, \emph{closing}, \emph{empty element}
+		\end{itemize}
+		\item Element
+		\begin{itemize}
+			\item Beginnt mit \emph{opening tag} und endet mit entsprechendem \emph{closing tag}
+			\item Inhalt entweder Text oder andere Elemente
+			\item Beachte Gross-/Kleinschreibung, Sonderzeichen, Verschachtelung
+		\end{itemize}
+		\item Attribut
+		\begin{itemize}
+			\item In \emph{opening} oder \emph{empty-element tags}
+			\item Innerhalb Klammern \texttt{< >} als \texttt{name="value"} Paare
+		\end{itemize}
+		\item Dokument
+		\begin{itemize}
+			\item Enthält ein Wurzelelement
+			\item Ist wohlgeformt wenn syntaktisch korrekt
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML: Bemerkungen}
+	
+	\begin{itemize}
+		\item XML is mensch- und maschinenlesbar
+		\item Tags sind allerdings nur für Menschen Bedeutungsvoll
+		\item Verwendet für Datenaustausch, zwischen Anwendungen, im Internet
+		\item Interoperabilität beruht allerdings auf Einigung (Schema)
+		\item XML kann in Programmiersprachen gelesen/geschrieben werden
+		\item XML hat auch Nachteile, insb. Ballast wegen tagging
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XPath}
+	
+	\begin{itemize}
+		\item Ermöglicht die Verarbeitung von XML Daten
+		\item Deklarativer Zugriff auf Teile eines XML Dokuments
+		\item Selektion von Elementen und Inhalten
+		\item Operationen auf Inhalten
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XPath: Wichtige Sprachkonstrukte}
+	
+	\begin{itemize}
+		\item Lokalisierungspfad
+		\begin{itemize}
+			\item Adressierung von Knotenmengen
+			\item Setzt sich aus mehreren Einzelschritten zusammen
+			\item Diese werden mittels \texttt{/} getrennt
+			\item Absolut/relativ und ausführlich/verkürzt
+		\end{itemize}
+		\item Schritt
+		\begin{itemize}
+			\item A::KT[P]*
+			\item Achse: Navigationsrichtung aus dem Kontextknoten
+			\item Knotentest: Gewünschte Knotenmenge
+			\item Prädikat: Filterbedingungen
+		\end{itemize}
+		\item Prädikat
+		\begin{itemize}
+			\item Filtrierung/Einschänkung der XPath Ergebnissmenge
+			\item Definition genauer Zielmenge
+			\item Komplexere Problemstellungen
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{DTD}
+	
+	\begin{itemize}
+		\item Sprache zur Spezifikation von XML Dokumente
+		\item Beschreibung gültiger Elemente, Attribute, Struktur
+		\item Diese werden in einer DTD deklariert
+		\item Ermöglicht die Validierung von XML Dokumente
+		\item Sprich diese auf Gültigkeit zu prüfen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{DTD: Deklarationen}
+	
+	\begin{itemize}
+		\item Elemente
+		\begin{itemize}
+			\item \texttt{<!ELEMENT name inhalt>}
+			\item Inhalt: Kindelemente, \texttt{PCDATA}, \texttt{EMPTY}
+			\item Inhaltsmodelle: Sequenz, Alternative, Wiederholungen
+		\end{itemize}
+		\item Attribute
+		\begin{itemize}
+			\item \texttt{<!ATTLIST element attribut typ wert>}
+			\item Typen: \texttt{CDATA}, enumerierte Liste, \texttt{ID}, \texttt{ENTITY}
+			\item Werte: Standardwert, \texttt{\#REQUIRED}, \texttt{\#IMPLIED}, \texttt{\#FIXED value}
+		\end{itemize}
+		\item Entitäten
+		\begin{itemize}
+			\item \texttt{<!ENTITY name "wert">}
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML Schema}
+	
+	\begin{itemize}
+		\item Weitere Sprache zur Spezifikation von XML Dokumente
+		\item Adressiert einige Schächen der DTD
+		\item Datentypen, Namensräume, XML Syntax
+		\item Stellt vordefinierte Datentypen zur Verfügung
+		\item Definition benutzerdefinierte Datentypen
+		\item Ermöglicht detailliertere Spezifikation von XML Dokumente
+		\item Strengere Restriktionen die auf Gültigkeit geprüft werden können
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML Schema: Datentypen}
+	
+	\begin{itemize}
+		\item Datentypen sind wichtig
+		\item \texttt{2018-02-10} und \texttt{0.5} sind Daten mit verschiedenem Typ
+		\item In XML Schema spezifiziert man diese nicht als \texttt{PCDATA}
+		\item Sondern als \texttt{xs:dateTime} und \texttt{xs:decimal}
+		\item Zudem spezifiziert \texttt{xs:dateTime} das Format \texttt{YYYY-MM-DD}
+		\item \texttt{2018-02-10} ist somit 10. Februar, nicht 2. Oktober
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{XML Schema: Deklarationen}
+	
+	\begin{itemize}
+		\item Einfache Elemente (keine Kindelemente oder Attribute)
+		\begin{itemize}
+			\item \texttt{<xs:element name="..." type="..."/>}
+			\item Typen: \texttt{xs:string}, \texttt{xs:boolean}, \texttt{xs:int}, ...
+			\item Vorgegebene (\texttt{default}) oder festgelegte (\texttt{fixed}) Werte
+			\item Häufigkeit des Elements (\texttt{minOccurs}, \texttt{maxOccurs})
+		\end{itemize}
+		\item Attribute
+		\begin{itemize}
+			\item \texttt{<xs:attribute name="..." type="..."/>}
+			\item Können vorgegebene oder festgelegte Werte haben
+		\end{itemize}
+		\item Komplexe Elemente
+		\begin{itemize}
+			\item \texttt{<xs:element><xs:complexType>...}
+			\item Zwei Varianten, eine mit benutzerdefiniertem Datentyp
+			\item Ordnung mittels \texttt{xs:all}, \texttt{xs:choice}, \texttt{xs:sequence}
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Wozu Schema}
+	
+	\begin{itemize}
+		\item Beispiel NASA, ESA und JAXA die Daten austauschen
+		\item Einigung über verwendeten Tags
+		\item Wie auch die Struktur (Elemente, Attribute)
+		\item Ziel ist es Unterschiede zu vermeiden
+		\item Und so den Datenaustausch zu erleichtern
+		\item Die Interoperabilität der System erhöhen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Wohlgeformtheit und Gültigkeit}
+	
+	\begin{itemize}
+		\item Ein XML Dokument mit korrekter Syntax ist wohlgeformt
+		\item Validiert ein wohlgeformtes Dokument einem Schema ist es gültig
+		\item Ein gültiges Dokument ist immer auch wohlgeformt (\emph{well-formed})
+		\item Ein wohlgeformtes Dokument ist nicht zwingend gültig (\emph{valid})
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF}
+	
+	\begin{itemize}
+		\item Resource Description Framework
+		\item Beschreibung von Ressourcen, digitale, physische, imaginäre Entitäten
+		\item Grundlegender Baustein des \emph{Semantic Web}
+		\item Formale Spezifikation der Bedeutung von Daten
+		\item Graphbasiertes Datenformat, Knoten und gerichtete Kanten
+		\item Mittels URI benannt, Literale oder \emph{blank nodes}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF: Literale und \emph{blank nodes}}
+	
+	\begin{itemize}
+		\item Repräsentieren Datenwerte
+		\item Können typisiert oder untypisiert sein
+		\item Typisierte Literale haben einen Datentyp
+		\item Untypisierte Literale können ein \emph{language tag} haben
+		\item \emph{Blank nodes} sind unbenannte Knoten
+		\item Haben strukturelle Funktion für mehrwertige Relationen
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF: Tripel}
+	
+	\begin{itemize}
+		\item Die Elementareinheit in RDF
+		\item Eine Struktur die aus drei Elementen besteht
+		\item Das Subjekt, das Prädikat und das Objekt
+		\item Subjekte und Objekte entsprechen Knoten 
+		\item Prädikate entsprichen gerichteten Kanten
+		\item Prädikate sind immer benannt (URI)
+		\item Subjekte und Objekte können unbenannt sein (\emph{blank node})
+		\item Subjekte und Objekte können benannt sein (URI)
+		\item Objekte können Literale sein
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF: Syntax}
+	
+	\begin{itemize}
+		\item Tripelmengen können entsprechend einer Syntax serialisiert werden
+		\item Besprochene Syntaxen: N-Triples, Turtle, RDF/XML
+		\item Jede Syntax hat Vor- und Nachteile
+		\item Man kann zwischen Syntaxen convertieren (automatisch)
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{SPARQL}
+	
+	\begin{itemize}
+		\item SPARQL Protocol And RDF Query Language
+		\item Abfragesprache für RDF
+		\item Ermöglicht deklarativer Zugriff auf RDF Daten
+		\item \emph{Tripel pattern} (Tripelmuster) fundamentale Struktur
+		\item Besteht aus drei Elementen: Subjekt, Prädikat und Objekt
+		\item Wobei diese auch variabel sein können (im Unterschied zum Tripel)
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{SPARQL}
+	
+	\begin{itemize}
+		\item Eine \emph{tripel pattern} Menge nennt man \emph{basic graph pattern}
+		\item Resultatformate: \texttt{SELECT}, \texttt{CONSTRUCT}, \texttt{ASK}, \texttt{DESCRIBE}
+		\item Modifizierer: \texttt{FILTER}, \texttt{ORDER BY}, \texttt{LIMIT}, \texttt{OFFSET}
+		\item SPARQL Update um RDF Daten deklarativ zu ändern
+		\item SPARQL Endpoints für RDF Datenbank als Web Service
+		\item Abfrageoptimierung damit man Antworten möglichst schnell erhält
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF Schema}
+	
+	\begin{itemize}
+		\item RDFS unterstützt das Organisieren von Ressourcen einer Tripelmenge
+		\item Grundlegend dabei ist die Gruppierung von Ressourcen
+		\item Dafür stellt RDFS das Konstrukt der Klasse zur Verfügung
+		\item RDFS ermöglicht Klassen als solche zu definieren
+		\item Als Instanzen der Klasse aller Klassen (\texttt{rdfs:Class})
+		\item Dabei spielt das Prädikat \texttt{rdf:type} eine wichtige Rolle
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{RDF Schema}
+	
+	\begin{itemize}
+		\item RDFS ermöglich die Definition von Unterklassen (\texttt{rdfs:subClassOf})
+		\item Und somit die Erzeugung von Klassenhierarchien
+		\item Prädikathierarchien sind ebenfalls möglich (\texttt{rdfs:subPropertyOf})
+		\item Klassenzugehörigkeiten (\texttt{rdfs:domain}, \texttt{rdfs:range}) 
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Ontologien}
+	
+	\begin{itemize}
+		\item Formalisierung von Wissen über eine Domäne
+		\item Begriffe und Beziehungen eines Gegenstandsbereiches
+		\item Informationsaustausch unter Beihaltung der Bedeutung
+		\item Bestandteile: Klassen, Relationen, Instanzen
+		\item Aufbau: Schema, Inhalt
+		\item Wissensquellen: Mensch, Bücher, Web, Datenbanken
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[plain]{}
+	
+	\huge
+	\begin{center}
+		Ausblick
+	\end{center}
+	
+\end{frame}
+
+\end{document}
