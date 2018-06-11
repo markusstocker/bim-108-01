@@ -191,8 +191,8 @@
 	
 	\begin{itemize}
 		\item Weitere Sprache zur Spezifikation von XML Dokumente
-		\item Adressiert einige Schächen der DTD
-		\item Datentypen, Namensräume, XML Syntax
+		\item Adressiert einige Schwächen der DTD
+		\item Insb. Datentypen, Namensräume, XML Syntax
 		\item Stellt vordefinierte Datentypen zur Verfügung
 		\item Definition benutzerdefinierte Datentypen
 		\item Ermöglicht detailliertere Spezifikation von XML Dokumente
@@ -205,11 +205,11 @@
 	
 	\begin{itemize}
 		\item Datentypen sind wichtig
-		\item \texttt{2018-02-10} und \texttt{0.5} sind Daten mit verschiedenem Typ
+		\item \texttt{2018-02-10} und \texttt{0.5} sind Daten von verschiedenem Typ
 		\item In XML Schema spezifiziert man diese nicht als \texttt{PCDATA}
 		\item Sondern als \texttt{xs:dateTime} und \texttt{xs:decimal}
 		\item Zudem spezifiziert \texttt{xs:dateTime} das Format \texttt{YYYY-MM-DD}
-		\item \texttt{2018-02-10} ist somit 10. Februar, nicht 2. Oktober
+		\item \texttt{2018-02-10} ist somit 10. Februar nicht 2. Oktober
 	\end{itemize}
 	
 \end{frame}
@@ -243,11 +243,11 @@
 	
 	\begin{itemize}
 		\item Beispiel NASA, ESA und JAXA die Daten austauschen
-		\item Einigung über verwendeten Tags
+		\item Einigung über verwendete Tags
 		\item Wie auch die Struktur (Elemente, Attribute)
 		\item Ziel ist es Unterschiede zu vermeiden
 		\item Und so den Datenaustausch zu erleichtern
-		\item Die Interoperabilität der System erhöhen
+		\item Die Interoperabilität der Systeme erhöhen
 	\end{itemize}
 	
 \end{frame}
@@ -279,11 +279,11 @@
 \begin{frame}{RDF: Literale und \emph{blank nodes}}
 	
 	\begin{itemize}
-		\item Repräsentieren Datenwerte
+		\item Literale repräsentieren Datenwerte
 		\item Können typisiert oder untypisiert sein
 		\item Typisierte Literale haben einen Datentyp
 		\item Untypisierte Literale können ein \emph{language tag} haben
-		\item \emph{Blank nodes} sind unbenannte Knoten
+		\item \emph{Blank nodes} sind unbenannte Ressourcen
 		\item Haben strukturelle Funktion für mehrwertige Relationen
 	\end{itemize}
 	
@@ -296,7 +296,7 @@
 		\item Eine Struktur die aus drei Elementen besteht
 		\item Das Subjekt, das Prädikat und das Objekt
 		\item Subjekte und Objekte entsprechen Knoten 
-		\item Prädikate entsprichen gerichteten Kanten
+		\item Prädikate entsprechen gerichteten Kanten
 		\item Prädikate sind immer benannt (URI)
 		\item Subjekte und Objekte können unbenannt sein (\emph{blank node})
 		\item Subjekte und Objekte können benannt sein (URI)
@@ -332,7 +332,7 @@
 \begin{frame}{SPARQL}
 	
 	\begin{itemize}
-		\item Eine \emph{tripel pattern} Menge nennt man \emph{basic graph pattern}
+		\item Eine \emph{triple pattern} Menge nennt man \emph{basic graph pattern}
 		\item Resultatformate: \texttt{SELECT}, \texttt{CONSTRUCT}, \texttt{ASK}, \texttt{DESCRIBE}
 		\item Modifizierer: \texttt{FILTER}, \texttt{ORDER BY}, \texttt{LIMIT}, \texttt{OFFSET}
 		\item SPARQL Update um RDF Daten deklarativ zu ändern
