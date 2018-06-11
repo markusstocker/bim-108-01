@@ -111,15 +111,15 @@
 		\end{itemize}
 		\item Relationen (\emph{relations}, \emph{properties})
 		\begin{itemize}
-			\item Dienen zur Beschreibung der Eigenschaften
+			\item Dienen der Beschreibung von Eigenschaften
 			\item Beziehungen zwischen Klassen und deren Instanzen
 			\item Beispiel: Die Eigenschaft Radius, Beziehung zwischen Planet und Wert
 		\end{itemize}
 		\item Instanzen (\emph{instances}, \emph{individuals})
 		\begin{itemize}
 			\item Elemente einer oder mehrerer Klassen
-			\item Beispiel: Der Planet Erde als Instanz der Klasse der Planeten
 			\item Auch als Objekte bezeichnet
+			\item Beispiel: Der Planet Erde als Instanz der Klasse der Planeten
 		\end{itemize}
 	\end{itemize}
 	
@@ -129,7 +129,7 @@
 
 	\begin{itemize}
 		\item Schema (\emph{terminological box}): Vokabular, Klassen und Relationen
-		\item Inhalt (\emph{assertional box}): Instanzen, Aussagen, Daten 
+		\item Inhalt (\emph{assertional box}): Instanzen/Individuum, Aussagen, Daten 
 		\item Dabei verwenden Inhalte das Schema
 		\item Beispiel
 	\end{itemize}	
@@ -137,15 +137,17 @@
     \begin{center}
     	\begin{tabular}{c}
     		\begin{lstlisting}
+ex:Planet rdfs:subClassOf rdfs:Class
 ex:earth rdf:type ex:Planet
     		\end{lstlisting}
     	\end{tabular}
     \end{center}
     
 	\begin{itemize}
-		\item Das Tripel ist eine Aussage
-		\item \texttt{ex:earth} is hier eine Instanz
+		\item Das erste Tripel ist Schema
+		\item Das zweite Tripel ist Inhalt
 		\item \texttt{ex:Planet} ist eine Klasse
+		\item \texttt{ex:earth} is eine Instanz (Individuum)
 	\end{itemize}	
 	
 \end{frame}
@@ -206,7 +208,7 @@ ex:earth rdf:type ex:Planet
 	\begin{itemize}
 		\item Ontologien entwickeln (\emph{ontology engineering}) ist eine eigene Disziplin
 		\item Über einfache Beispiele hinaus, ist die Aufgabe generell komplex
-		\item Schwierigkeit nicht primär im erlernen von Technologie (z.B. RDFS)
+		\item Schwierigkeit nicht primär im Erlernen von Technologie (z.B. RDFS)
 		\item Schwieriger ist Wissen aus Köpfen in Dokumente zu formalisieren
 	\end{itemize}
 	
@@ -215,11 +217,11 @@ ex:earth rdf:type ex:Planet
 \begin{frame}{Ontologien Entwickeln}
 	
 	\begin{itemize}
-		\item Zudem spielt der Zweck der Ontologie eine wichtige Rolle
+		\item Der zweck der Ontologie spielt eine wichtige Rolle
 		\item Oft bestimmt der Zweck welche Aspekte man formalisiert
 		\item Entwicklung von Ontologien also strukturiert angehen
 		\item Insbesondere auch Anforderungsanalyse durchführen
-		\item Ähnlich wie bei Entwicklung von Software
+		\item Ähnlich wie bei der Entwicklung von Software
 	\end{itemize}
 	
 \end{frame}
@@ -274,7 +276,7 @@ ex:earth rdf:type ex:Planet
 	\begin{itemize}
 		\item Experten halten viel Wissen in Köpfen
 		\item Die meisten können Wissen aber nicht formalisieren
-		\item Weil sie sich mit RDFS (und andere Sprachen) nicht auskennen
+		\item Weil sie sich mit RDFS nicht auskennen
 		\item Zusammenarbeit mit ``Wissensingenieure'' nötig
 		\item Diese führen Interviews durch und erfassen Expertenwissen
 		\item Experten können nicht immer dinge genau definieren
@@ -331,7 +333,7 @@ ex:earth rdf:type ex:Planet
 		\item Damit erhält man auf einfache Weise semantische Aussagen
 		\item Schemainformation kann man zusätzlich verwenden
 		\item Um terminologisches Wissen aufzubauen
-		\item Andere Ontologien sind Quellen für bereits formalisiertes Wissen
+		\item Andere Ontologien sind auch Quellen für bereits formalisiertes Wissen
 	\end{itemize}
 	
 \end{frame}
@@ -343,7 +345,7 @@ ex:earth rdf:type ex:Planet
 		\item Frei erhältlich unter https://protege.stanford.edu
 		\item Als Lokalinstallation oder im Web verfügbar
 		\item Web Version unter https://webprotege.stanford.edu/
-		\item Wir benutzen diese nun um eine kleine Ontologie zu entwickeln
+		\item Wir benutzen Prot{\'e}g{\'e} um eine kleine Ontologie zu entwickeln
 	\end{itemize}
 	
 \end{frame}
