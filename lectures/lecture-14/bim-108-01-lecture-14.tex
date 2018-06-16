@@ -388,4 +388,271 @@
 	
 \end{frame}
 
+\begin{frame}{Übersicht}
+	
+	\begin{itemize}
+		\item XLink
+		\item XPointer
+		\item XSLT
+		\item XQuery
+		\item Web Ontology Language (OWL)
+		\item Regeln
+		\item Inferenz
+		\item Programme
+		\item Ontologien
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{XLink}
+	
+	\begin{itemize}
+		\item Ermöglicht das Setzen von Hyperlinks in XML Dokumente
+		\item Ähnlich wie \texttt{<a href="">...</a>} in HTML
+		\item Allerdings können beliebig benannte Elemente einen XLink setzen
+		\item Von Browsern generell nicht unterstützt
+	\end{itemize}
+	
+	\vspace{0.5cm}
+	
+	\lstset{language=XML}\small
+	\begin{lstlisting}
+<planets xmlns:xlink="http://www.w3.org/1999/xlink">
+  <planet xlink:type="simple" xlink:href="http://planets.org">
+    <name>Earth</name>
+    <radius>6371</radius>
+  </planet>
+</planets>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{XPointer}
+	
+	\begin{itemize}
+		\item Ermöglicht die Verlinkung auf Teile eines Dokuments
+		\item XLink verlink nur auf ganze Dokumente
+	\end{itemize}
+	
+	\vspace{0.5cm}
+	
+	\lstset{language=XML}\footnotesize
+	\begin{lstlisting}
+<!-- http://planets.org -->
+<planets>
+  <planet id="Earth">
+    <name>Earth</name>
+    <radius>6371</radius>
+  </planet>
+</planets>
+
+<!-- My list of planets linking to http://planets.org elements -->
+<planets xmlns:xlink="http://www.w3.org/1999/xlink">
+  <planet xlink:type="simple" xlink:href="http://planets.org#Earth"/>
+</planets>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{XSLT}
+	
+	\begin{itemize}
+		\item eXtensible Stylesheet Language Transformations
+		\item Styling Sprache für XML
+		\item XML Dokumente nach andere XML Dokumente transformieren
+		\item Aber auch nach (X)HTML oder andere Formate (z.B. CSV)
+		\item XSLT verwendet XPath um XML Dokumente zu navigieren
+		\item Elemente und Attribute können hinzugefügt/gelöscht werden
+		\item Elemente können anders sortiert werden
+		\item Man kann XML Dokumente client- oder serverseitig transformieren
+		\item Clientseitig z.B. im Browser mittels JavaScript
+		\item Serverseitig z.B. in PHP
+		\item XML Daten für jegliche Anwendung zur Präsentation vorbereiten
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{XSLT Beispiel: Eingabe Dokument}
+	
+	\lstset{language=XML}
+	\begin{lstlisting}
+<planets>
+  <planet>
+    <name>Earth</name>
+    <radius>6371</radius>
+  </planet>
+  <planet>
+    <name>Mars</name>
+  </planet>
+</planets>
+	\end{lstlisting}
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{XSLT Beispiel: Transformations Dokument}
+	
+	\lstset{language=XML}\scriptsize
+	\begin{lstlisting}
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:template match="/">
+    <html>
+      <body>
+        <h2>Solar System Planets</h2>
+        <table>
+          <tr><th>Name</th><th>Radius</th></tr>
+          <xsl:for-each select="planets/planet">
+            <tr>
+              <td><xsl:value-of select="name"/></td>
+              <td><xsl:value-of select="radius"/></td>
+            </tr>
+          </xsl:for-each>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+
+</xsl:stylesheet>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{XSLT Beispiel: Ausgabe Dokument}
+	
+	\lstset{language=HTML}
+	\begin{lstlisting}
+<html>
+  <body>
+    <h2>Solar System Planets</h2>
+    <table>
+      <tr><th>Name</th><th>Radius</th></tr>
+      <tr><td>Earth</td><td>6371</td></tr>
+      <tr><td>Mars</td><td></td></tr>
+    </table>
+  </body>
+</html>
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}[fragile]{XSLT Beispiel: Python}
+	
+	\lstset{language=Python}
+	\begin{lstlisting}
+from lxml import etree
+
+xslt = """ MY XSLT DOCUMENT """
+
+xml = """ MY XML DOCUMENT """
+
+transform = etree.XSLT(etree.XML(xslt))
+
+print(str(transform(etree.XML(xml))))
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{XQuery}
+	
+	\begin{itemize}
+		\item Abfragesprache für XML
+		\item Deklarativer Zugriff auf Elemente und Attribute
+		\item Baut auf XPath auf und erinnert an SQL
+		\item Kann verwendet werden um XML Daten zu transformieren
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]{XQuery: Beispiel}
+	
+	\lstset{language=}
+	\begin{lstlisting}
+for $x in doc("planets.xml")/planets/planet
+where $x/radius>6000
+order by $x/radius
+return $x/name
+	\end{lstlisting}
+	
+\end{frame}
+
+\begin{frame}{Web Ontology Language (OWL)}
+	
+	\begin{itemize}
+		\item Eine weitere Ontologiesprache
+		\item Baut auf RDF Schema auf
+		\item Ist wesentlich ausdruckstärker
+		\item Man kann damit also komplexeres Wissen formalisieren
+		\item Unter Berücksichtigung der Rechenkomplexität
+		\item Gleich wie RDFS sind auch OWL Ontologien RDF Dokumente
+		\item Seit 2004 eine W3C Recommendation
+		\item OWL 2 seit 2012 eine W3C Recommendation
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Web Ontology Language (OWL)}
+	
+	\begin{itemize}
+		\item Unterklassen und ausserdem äquivalente und disjunkte Klassen
+		\item Instanzen können als equivalent oder verschieden deklariert werden
+		\item Logische Klassenkonstruktoren ermöglichen komplexe Klassen
+		\item Schnitt- (\emph{and}), Vereinigungs- (\emph{or}), Komplementärmenge (\emph{not})
+		\item Prädikatbeschränkungen für komplexe Klassenbeschreibungen
+		\item Äquivalente, inverse, transitive, symmetrische, funktionelle Prädikate
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Regeln}
+	
+	\begin{itemize}
+		\item Wissen kann man in Ontologien auch als Regeln erfassen
+		\item Schlussfolgerung wenn eine Prämisse erfüllt ist
+		\item Beispiel: Eine Frau die ein Kind hat ist eine Mutter
+		\item Regeln sind auch Teil einer Ontologie (des Schemas)
+		\item Spielen auch eine wichtige Rolle bei Inferenz
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Inferenz}
+	
+	\begin{itemize}
+		\item Bei der logischen Inferenz geht es um deduktive Schlussfolgerung
+		\item RDFS, OWL und Regeln ermöglichen automatische Inferenz
+		\item Einfaches Beispiel: Implizite Klasseninstanzen in einer Hierarchie
+		\item Weiteres Beispiel: Konsistenzprüfung einer Ontologie
+		\item Eines der komplexeren Themen im Bereich Wissensrepräsentation
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Programme}
+	
+	\begin{itemize}
+		\item Prot{\'e}g{\'e}, TopBraid Composer, OntoStudio
+		\item Stardog, Virtuoso, BlazeGraph, AllegroGraph
+		\item HermiT, ELK, FaCT++
+		\item OWL API, Jena, RDF4J
+		\item ...
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Ontologien}
+	
+	\begin{itemize}
+		\item Es gibt sehr viele existierende Ontologien
+		\item Von abstraktem bis sehr konkretem Wissen
+		\item Decken viele Themenbereiche
+		\item Insbesondere Bioinformatik aber zunehmend auch andere
+		\item Repositorien für Ontologien (z.B. EBI Ontology Lookup Service)
+		\item Ontologien, Taxonomien, Thesauri
+		\item Unterschiedlicher Komplexitäts- und Reifegrad
+	\end{itemize}
+	
+\end{frame}
+
 \end{document}
